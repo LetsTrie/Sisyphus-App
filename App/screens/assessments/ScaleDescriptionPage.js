@@ -3,126 +3,84 @@ import React, { useState } from 'react';
 import {
   ImageBackground,
   StyleSheet,
-  TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 import { AppButton } from '../../components/button';
-import AppModal from '../../components/modal';
 import Text from '../../components/text';
+import { useNavigation } from '@react-navigation/native';
 
-const ScaleDescriptionPage = ({ navigation, route, ...props }) => {
-  let testInfo = {
-    title: 'Title',
-    description: 'Description',
+const ScaleDescriptionPage = (props) => {
+  const navigation = useNavigation();
+
+  const takeTestHandle = () => {
+    props.closeModal();
+    setTimeout(() => {
+      navigation.navigate('ExploreScale', {
+        ...props.scale,
+      });
+    }, 5);
   };
 
-  const [modalVisible, setModalVisible] = useState(false);
-
   return (
-    <>
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          source={require('../../assests/images/ReadyForTest.jpeg')}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <LinearGradient
-            colors={['#525252', '#757575']}
-            start={[0, 0]}
-            end={[1, 1]}
-            style={styles.linearGradientStyle}
-          ></LinearGradient>
-
-          <View style={styles.container}>
-            <View>
-              <Text style={styles.headingText}>{testInfo.title}</Text>
-            </View>
-            <View style={styles.description}>
-              <Text style={styles.descriptionText}>
-                {testInfo.description}
-              </Text>
-            </View>
-            <View>
-              <AppButton
-                title="Take Test"
-                onPress={() =>
-                  navigation.navigate('ExploreScale', {
-                    ...route.params,
-                  })
-                }
-              />
-              <AppButton title="See History" />
-            </View>
-            <TouchableOpacity
-              style={styles.aboutDesc}
-              onPress={() => setModalVisible(true)}
-            >
-              <Text style={styles.aboutDescText}>
-                বিস্তারিত পড়ুন{' '}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+    <View style={styles.scrollViewStyle}>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.headingText}>
+            {props.scale.banglaTitle}
+          </Text>
+        </View>
+        <View style={styles.description}>
+          <Text style={styles.descriptionText}>
+            {props.scale.description}
+          </Text>
+        </View>
+        <View>
+          <AppButton
+            title="স্কেল পূরণ করুন"
+            onPress={takeTestHandle}
+            style={{ backgroundColor: '#52a871' }}
+            textStyle={{ fontSize: 17.5 }}
+          />
+          <AppButton
+            title="হিস্ট্রি দেখুন"
+            style={{ backgroundColor: '#52a871' }}
+            textStyle={{ fontSize: 17.5 }}
+          />
+        </View>
       </View>
-      {/* <AppModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        title={testInfo.title}
-        description={getDetails()}
-      /> */}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  linearGradientStyle: {
-    opacity: 0.5,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
+  scrollViewStyle: {
     height: '100%',
   },
   container: {
-    flex: 1,
-    justifyContent: 'space-evenly',
+    height: '100%',
     padding: 10,
   },
   headingText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 35,
+    // color: 'white',
+    fontSize: 26,
     lineHeight: 45,
     letterSpacing: 0.2,
     fontWeight: '700',
+    paddingHorizontal: 15,
+    fontWeight: '700',
+    paddingVertical: 15,
+    paddingBottom: 15,
+    color: '#52a871',
   },
   descriptionText: {
     textAlign: 'center',
-    color: 'white',
-    fontSize: 22.5,
-    letterSpacing: 0.2,
-    fontWeight: '700',
-    lineHeight: 32,
-    paddingHorizontal: 3,
-  },
-  aboutDesc: {
-    alignItems: 'center',
-    paddingTop: 10,
-    fontWeight: '700',
-    fontSize: 18,
-    textTransform: 'uppercase',
-    textDecorationLine: 'underline',
-    textDecorationStyle: 'dotted',
-    color: '#f8f1f1',
-  },
-  aboutDescText: {
-    fontWeight: '700',
-    fontSize: 18,
-    textTransform: 'uppercase',
-    color: '#fff',
-    paddingVertical: 5,
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    letterSpacing: 1,
+    fontSize: 17,
+    lineHeight: 28.5,
+    padding: 5,
+    paddingBottom: 30,
+    color: '#666',
   },
 });
 

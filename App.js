@@ -18,6 +18,7 @@ import { SpecificIssues } from './App/screens/specificIssues';
 
 import AssessmentList from './App/screens/assessments/AssessmentList.js';
 import Scale from './App/screens/assessments/Scale';
+import Result from './App/screens/assessments/Result';
 import { ScaleDescriptionPage } from './App/screens/assessments/ScaleDescriptionPage';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -63,7 +64,7 @@ export default function App() {
               initialRouteName="LoginSignup"
               screenOptions={{
                 headerStyle: {
-                  backgroundColor: colors.primary,
+                  backgroundColor: '#479162',
                   height: 60,
                 },
                 headerTitleStyle: {
@@ -99,7 +100,7 @@ export default function App() {
                 name="AssessmentList"
                 component={AssessmentList}
                 options={({ navigation }) => ({
-                  title: 'Assessment Lists',
+                  title: 'নিজেকে মূল্যায়ন করুন',
                 })}
               />
 
@@ -114,16 +115,16 @@ export default function App() {
               <Stack.Screen
                 name="ExploreScale"
                 component={Scale}
-                options={({ navigation }) => ({
-                  title: 'Scale',
+                options={({ navigation, route, ...props }) => ({
+                  title: route.params.banglaTitle,
                 })}
               />
-              {/* ScaleDescriptionPage */}
+              {/* Result */}
               <Stack.Screen
-                name="ScaleDescriptionPage"
-                component={ScaleDescriptionPage}
+                name="ScaleResult"
+                component={Result}
                 options={({ navigation }) => ({
-                  title: 'Scale Description Page',
+                  title: 'Scale Result',
                 })}
               />
             </Stack.Navigator>

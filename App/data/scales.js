@@ -73,7 +73,7 @@ export default [
     isMesaurable: true,
     questionnaires: [
       {
-        question: 'আমার অশান্তি লাগে।',
+        question: 'আমার অশান্তি লাগে',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -84,7 +84,7 @@ export default [
         ],
       },
       {
-        question: 'ইদানিং আমি মন মরা থাকি।',
+        question: 'ইদানিং আমি মন মরা থাকি',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -95,7 +95,7 @@ export default [
         ],
       },
       {
-        question: 'আমার ভবিষ্যত অন্ধকার।',
+        question: 'আমার ভবিষ্যত অন্ধকার',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -106,7 +106,7 @@ export default [
         ],
       },
       {
-        question: 'ভবিষ্যতে আমার অবস্থা দিন দিন আরো খারাপ হবে।',
+        question: 'ভবিষ্যতে আমার অবস্থা দিন দিন আরো খারাপ হবে',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -117,7 +117,7 @@ export default [
         ],
       },
       {
-        question: 'আমার সব শেষ হয়ে গেছে।',
+        question: 'আমার সব শেষ হয়ে গেছে',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -128,206 +128,7 @@ export default [
         ],
       },
       {
-        question: 'আমি মনে করি যে , জীবনটা বর্তমানে খুব বেশি কষ্টকর।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question:
-          'বর্তমানে আমি অনুভব করি যে মানুষ হিসাবে আমি সম্পূর্ণ ব্যর্থ।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি কোথাও আনন্দ ফুর্তি পাই না।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'নিজেকে খুব ছোট মনে হয়।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'সবকিছুতে আমার আত্নবিশ্বাস কমে গেছে।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমার মনে হয় মানুষ আমাকে করুণা করে।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'জীবনটা অর্থহীন।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'প্রায়ই আমার কান্না পায়।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি প্রায়ই বিরক্ত বোধ করি।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি কোন কিছুতেই আগ্রহ পাই না।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি ইদানিং চিন্তা করতে ও সিদ্ধান্ত নিতে পারি না।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি আজকাল অনেক কিছুতেই মনোযোগ দিতে পারি না।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি আগের মতো মনে রাখতে পারি না।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি দুর্বল বোধ করি এবং অল্পতেই ক্লান্ত হয়ে পরি।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি এখন কম ঘুমাই।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমি এখন বেশি ঘুমাই।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমার মেজাজ খিটখিটে হয়ে গেছে।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমার ক্ষুধা কমে গেছে।',
-        answerType: 'multiple-choice',
-        options: [
-          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
-          { label: 'প্রযোজ্য নয়', value: 2 },
-          { label: 'মাঝামাঝি', value: 3 },
-          { label: 'কিছুটা প্রযোজ্য', value: 4 },
-          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
-        ],
-      },
-      {
-        question: 'আমার ক্ষুধা বেড়ে গেছে।',
+        question: 'আমি মনে করি যে , জীবনটা বর্তমানে খুব বেশি কষ্টকর',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -339,7 +140,7 @@ export default [
       },
       {
         question:
-          'আমার ওজন কমে গেছে (ইচ্ছাকৃতভাবে ওজন নিয়ন্ত্রণের চেষ্টা করার ফলে নয়)।',
+          'বর্তমানে আমি অনুভব করি যে মানুষ হিসাবে আমি সম্পূর্ণ ব্যর্থ',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -350,7 +151,7 @@ export default [
         ],
       },
       {
-        question: 'আমার মনে হয় যে আমার কাজকর্মের গতি কমে গেছে।',
+        question: 'আমি কোথাও আনন্দ ফুর্তি পাই না',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -361,7 +162,7 @@ export default [
         ],
       },
       {
-        question: 'হাসির কোন ঘটনা ঘটলেও আমি আর হাসতে পারি না।',
+        question: 'নিজেকে খুব ছোট মনে হয়',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -372,7 +173,7 @@ export default [
         ],
       },
       {
-        question: 'যৌন বিষয়ে আমার আগ্রহ কমে গেছে।',
+        question: 'সবকিছুতে আমার আত্নবিশ্বাস কমে গেছে',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -383,7 +184,7 @@ export default [
         ],
       },
       {
-        question: 'সামাজিক কাজকর্মে আগের মতো অংশগ্রহণ করতে পারি না।',
+        question: 'আমার মনে হয় মানুষ আমাকে করুণা করে',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
@@ -394,7 +195,206 @@ export default [
         ],
       },
       {
-        question: 'শিক্ষা বা পেশাগত কাজকর্ম আগের মতো করতে পারি না।',
+        question: 'জীবনটা অর্থহীন',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'প্রায়ই আমার কান্না পায়',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি প্রায়ই বিরক্ত বোধ করি',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি কোন কিছুতেই আগ্রহ পাই না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি ইদানিং চিন্তা করতে ও সিদ্ধান্ত নিতে পারি না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি আজকাল অনেক কিছুতেই মনোযোগ দিতে পারি না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি আগের মতো মনে রাখতে পারি না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি দুর্বল বোধ করি এবং অল্পতেই ক্লান্ত হয়ে পরি',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি এখন কম ঘুমাই',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমি এখন বেশি ঘুমাই',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমার মেজাজ খিটখিটে হয়ে গেছে',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমার ক্ষুধা কমে গেছে',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমার ক্ষুধা বেড়ে গেছে',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question:
+          'আমার ওজন কমে গেছে (ইচ্ছাকৃতভাবে ওজন নিয়ন্ত্রণের চেষ্টা করার ফলে নয়)',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'আমার মনে হয় যে আমার কাজকর্মের গতি কমে গেছে',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'হাসির কোন ঘটনা ঘটলেও আমি আর হাসতে পারি না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'যৌন বিষয়ে আমার আগ্রহ কমে গেছে',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'সামাজিক কাজকর্মে আগের মতো অংশগ্রহণ করতে পারি না',
+        answerType: 'multiple-choice',
+        options: [
+          { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },
+          { label: 'প্রযোজ্য নয়', value: 2 },
+          { label: 'মাঝামাঝি', value: 3 },
+          { label: 'কিছুটা প্রযোজ্য', value: 4 },
+          { label: 'পুরোপুরি প্রযোজ্য', value: 5 },
+        ],
+      },
+      {
+        question: 'শিক্ষা বা পেশাগত কাজকর্ম আগের মতো করতে পারি না',
         answerType: 'multiple-choice',
         options: [
           { label: 'একেবারেই প্রযোজ্য নয়', value: 1 },

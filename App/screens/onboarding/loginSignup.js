@@ -42,6 +42,8 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
     scopes: ['openid', 'profile', 'email'],
   });
 
+  console.log(request, response, promptAsync);
+
   useEffect(() => {
     navigateAfterLogin(
       navigation,
@@ -117,11 +119,13 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
               <View>
                 <AppButton
                   title="অ্যাপে প্রবেশ করুন"
+                  style={styles.buttonStyle}
                   textStyle={styles.buttonText}
                   onPress={handlePress}
                 />
                 <AppButton
                   title="লগ আউট"
+                  style={styles.buttonStyle}
                   textStyle={styles.buttonText}
                   onPress={handleLogout}
                 />
@@ -130,12 +134,14 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
               <View>
                 <AppButton
                   title="লগিন করুন"
+                  style={styles.buttonStyle}
                   textStyle={styles.buttonText}
                   disabled={!request}
                   onPress={handlePress}
                 />
                 <AppButton
                   title="একাউন্ট তৈরি করুন"
+                  style={styles.buttonStyle}
                   textStyle={styles.buttonText}
                   disabled={!request}
                   onPress={handlePress}

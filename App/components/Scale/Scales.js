@@ -49,7 +49,7 @@ const ScaleComponent = ({
         onPress={!lastPosition ? () => setSubmitted(true) : null}
         disabled={lastPosition}
       >
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>সাবমিট করুন</Text>
       </TouchableOpacity>
     );
   };
@@ -64,7 +64,7 @@ const ScaleComponent = ({
           init ? null : () => handleQuestionChange(false, true)
         }
       >
-        <Text style={styles.buttonText}>Previous</Text>
+        <Text style={styles.buttonText}>পূর্ববর্তী</Text>
       </TouchableOpacity>
     );
   };
@@ -76,7 +76,7 @@ const ScaleComponent = ({
       </Text>
 
       <ProgressBar
-        color={colors.primary}
+        color={'#52a871'}
         progress={(currentQuestion + 1) / questions.length}
       />
       <View style={styles.quizes}>
@@ -135,20 +135,21 @@ const styles = StyleSheet.create({
   },
   quizes: {
     paddingVertical: 20,
-    paddingTop: 26,
+    paddingTop: 20,
   },
   questionText: {
-    fontSize: 22,
+    fontSize: 19.5,
     paddingVertical: 6,
     paddingBottom: 20,
-    lineHeight: 30,
+    lineHeight: 28,
+    fontWeight: '700',
   },
   twoButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   buttonStyle: {
-    backgroundColor: colors.primary,
+    backgroundColor: '#52a871',
     paddingHorizontal: 17,
     paddingVertical: 12,
     marginVertical: 14,

@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
   },
+  buttonStyle: {},
 });
 
 export default styles;

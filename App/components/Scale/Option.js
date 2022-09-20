@@ -50,13 +50,12 @@ const Option = ({
             checked ? styles.selectedOptionText : {},
           ]}
         >
-          {text} ({value})
+          {text}
         </Text>
         <RadioButton
           value={text}
           status={checked ? 'checked' : 'unchecked'}
-          color={colors.primary}
-          uncheckedColor={colors.primary}
+          color={'#52a871'}
           style={styles.optionStyle}
           onPress={onPress}
         />
@@ -72,24 +71,24 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderColor: '#ddd',
     paddingHorizontal: 13.5,
-    paddingVertical: 8,
+    paddingVertical: 5,
     borderRadius: 5,
     marginBottom: 10,
     backgroundColor: '#fff',
   },
   selectedOption: {
     borderWidth: 2,
-    borderColor: colors.primary,
+    borderColor: '#52a871',
     elevation: 1,
   },
   optionText: {
     flex: 1,
-    fontSize: 16,
-    color: '#333',
+    fontSize: 15,
+    color: '#444',
     alignSelf: 'center',
   },
   selectedOptionText: {
-    color: colors.primary,
+    color: '#52a871',
   },
 });
 

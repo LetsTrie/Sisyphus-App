@@ -21,7 +21,7 @@ const latestScaleUpdate = async (accessToken) => {
     { headers },
   );
 
-  return data;
+  return data.progress;
 };
 
 export { submitScale, latestScaleUpdate };

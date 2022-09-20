@@ -37,32 +37,37 @@ const Box = ({
   lastScore,
   lastDate,
   onPress,
-  boxStyle,
+  boxStyle = {},
 }) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={boxStyle ? boxStyle : styles.box}>
-        <ImageBackground
+    <TouchableWithoutFeedback
+      onPress={onPress}
+      style={{ backgroundColor: 'white' }}
+    >
+      <View style={[styles.box, boxStyle]}>
+        {/* <ImageBackground
           source={source}
           style={styles.backgroundImageStyle}
-        >
-          <LinearGradient
+        > */}
+        {/* <LinearGradient
             colors={['#75757598', '#2b2b2b98']}
             start={[1, 1]}
             end={[0, 0]}
             style={styles.linearGradientStyle}
-          ></LinearGradient>
-          <Text style={styles.testName}>{name}</Text>
-          {lastDate && (
-            <View style={styles.history}>
-              <Text style={styles.lastScore}>
-                Last Score: {lastScore}
-              </Text>
+          ></LinearGradient> */}
+        <Text style={styles.testName}>{name}</Text>
+        {lastDate && (
+          <View style={styles.history}>
+            <Text style={styles.lastScore}>
+              সর্বশেষ স্কোর{': '}
+              <Text style={styles.lastScoreValue}>{lastScore}</Text>
+            </Text>
+            <Text style={styles.lastDateContainer}>
+              <MaterialCommunityIcons
+                name="calendar-account"
+                size={18}
+              />{' '}
               <Text style={styles.lastDate}>
-                <MaterialCommunityIcons
-                  name="calendar-account"
-                  size={18}
-                />{' '}
                 {formatDate(
                   new Date(lastDate).toLocaleDateString('bn-BD', {
                     year: 'numeric',
@@ -71,9 +76,10 @@ const Box = ({
                   }),
                 )}
               </Text>
-            </View>
-          )}
-        </ImageBackground>
+            </Text>
+          </View>
+        )}
+        {/* </ImageBackground> */}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -82,57 +88,55 @@ const Box = ({
 const styles = StyleSheet.create({
   box: {
     width: '92%',
-    height: 250,
+    // height: 150,
     margin: 10,
     marginLeft: 14,
     marginBottom: 3,
-    elevation: 5,
+    padding: 10,
+    elevation: 4,
     borderRadius: 10,
     overflow: 'hidden',
+    backgroundColor: 'white',
   },
   backgroundImageStyle: {
-    height: 250,
+    // height: 250,
     width: '100%',
     flex: 1,
     resizeMode: 'cover',
   },
   testName: {
-    textTransform: 'uppercase',
+    paddingTop: 10,
+    paddingHorizontal: 15,
     fontWeight: '700',
-    fontSize: 22,
-    margin: 15,
-    marginLeft: 18,
-    color: 'white',
-    letterSpacing: 0.2,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    paddingHorizontal: 2,
-    textAlign: 'center',
-    lineHeight: 30,
+    fontSize: 18,
+    paddingBottom: 0,
+    color: '#52a871',
   },
   history: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
   lastScore: {
-    backgroundColor: colors.primary,
     paddingVertical: 5,
     paddingHorizontal: 15,
-    borderRadius: 2,
-    elevation: 1,
-    marginBottom: 5,
-    color: 'white',
-    fontWeight: '700',
+    fontSize: 15,
+    color: '#555',
   },
-  lastDate: {
-    alignSelf: 'flex-end',
-    paddingBottom: 15,
-    paddingRight: 15,
-    paddingTop: 3,
+  lastScoreValue: {
     fontSize: 16,
     fontWeight: '700',
-    color: 'white',
+  },
+  lastDateContainer: {
+    paddingRight: 15,
+    paddingVertical: 5,
+    color: '#555',
+  },
+  lastDate: {
+    fontSize: 15,
+    textAlign: 'right',
+    color: '#555',
   },
   linearGradientStyle: {
     opacity: 0.55,

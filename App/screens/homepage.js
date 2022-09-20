@@ -42,7 +42,7 @@ const Homepage = ({ navigation }) => {
         <View
           style={{
             height: (windowHeight / 2) * (3.8 / 5),
-            backgroundColor: '#3c7a53',
+            backgroundColor: '#479162',
             borderBottomRightRadius: 24,
             borderBottomLeftRadius: 24,
             paddingTop: 20,
