@@ -12,8 +12,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ScreenContainer } from './App/components/screenContainer';
 import LoginSignupComponent from './App/screens/onboarding/loginSignup';
-import { DemographicInformation } from './App/screens/onboarding/demographicInformation';
-import { Homepage } from './App/screens/homepage';
+import DemographicInformation from './App/screens/onboarding/demographicInformation';
+import Homepage from './App/screens/homepage';
 import { SpecificIssues } from './App/screens/specificIssues';
 
 import AssessmentList from './App/screens/assessments/AssessmentList.js';

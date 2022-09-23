@@ -88,7 +88,7 @@ const Box = ({
 const styles = StyleSheet.create({
   box: {
     width: '92%',
-    // height: 150,
+    minHeight: 65,
     margin: 10,
     marginLeft: 14,
     marginBottom: 3,

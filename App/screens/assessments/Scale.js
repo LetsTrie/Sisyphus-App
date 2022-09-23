@@ -46,8 +46,6 @@ const Scale = ({ navigation, route, ...props }) => {
     0,
   );
 
-  console.log(totalScore);
-
   const [answers, setAnswers] = useState(
     new Array(questions.length).fill(null),
   );

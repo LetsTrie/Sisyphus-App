@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { AppButton } from './button';
 import { useNavigation } from '@react-navigation/native';
@@ -16,6 +17,7 @@ const AppModal = ({
   description,
   navigateTo,
   onPress,
+  isLoading = false,
 }) => {
   const onPressHandler = async () => {
     try {
@@ -42,11 +44,20 @@ const AppModal = ({
                 <Text style={styles.modalHeading}>{title}</Text>
                 <Text style={styles.modalText}>{description}</Text>
               </View>
-              <AppButton
-                onPress={onPressHandler}
-                title="সম্মতি প্রদান করুন"
-                textStyle={{ fontSize: 18 }}
-              />
+              {isLoading ? (
+                <ActivityIndicator
+                  size={50}
+                  color={'#52a871'}
+                  style={{ paddingBottom: 25 }}
+                />
+              ) : (
+                <AppButton
+                  onPress={onPressHandler}
+                  title="সম্মতি প্রদান করুন"
+                  style={{ backgroundColor: '#52a871' }}
+                  textStyle={{ fontSize: 18 }}
+                />
+              )}
             </ScrollView>
           </View>
         </View>
@@ -79,17 +90,18 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalHeading: {
-    color: 'gray',
-    fontSize: 27,
+    color: '#5caf7a',
+    fontSize: 30,
     paddingVertical: 10,
     paddingBottom: 15,
     alignSelf: 'center',
     textAlign: 'center',
     lineHeight: 39,
+    fontWeight: '700',
   },
   modalText: {
     fontSize: 17,
-    lineHeight: 28,
+    lineHeight: 26.5,
     color: '#555',
     paddingBottom: 5,
     textAlign: 'justify',

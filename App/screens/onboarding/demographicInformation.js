@@ -20,6 +20,8 @@ import Picker from '../../components/picker';
 import Modal from '../../components/modal';
 import useFormFields from '../../components/handleForm';
 import baseUrl from '../../config/baseUrl';
+import { accountVerifiedAction } from '../../redux/actions/authActions';
+import { errorLog } from '../../helpers/log';
 
 import {
   googleAndroidClientId,
@@ -32,6 +34,7 @@ import {
   storeInStorage,
 } from '../../helpers/asyncStorage';
 import AS from '../../types/asyncStorage';
+import { connect } from 'react-redux';
 
 const genderLists = [
   { label: 'পুরুষ', value: 'male' },
@@ -151,7 +154,15 @@ const treatmentLists = [
   { label: 'সাধারন চিকিৎসা', value: 'traditional healing' },
 ];
 
-const DemographicInformation = ({ navigation, route }) => {
+const DemographicInformation = ({ navigation, route, ...props }) => {
+  const {
+    isAuthenticated,
+    isAccountVerified,
+    accessToken,
+    refreshToken,
+    accountVerifiedAction,
+  } = props;
+
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -218,16 +229,24 @@ const DemographicInformation = ({ navigation, route }) => {
 
   const validatePayload = async (body) => {
     let validationSchema = yup.object().shape({
-      name: yup.string().min(1).required(),
-      age: yup.number().required().positive().integer(),
+      name: yup.string().min(1, 'নাম পূরণ করুন').required(),
+      age: yup
+        .number()
+        .required()
+        .positive()
+        .integer()
+        .typeError('বয়স পূরণ করুন'),
       gender: yup
         .mixed()
-        .oneOf(genderLists.map((el) => el.value))
+        .oneOf(
+          genderLists.map((el) => el.value),
+          'লিঙ্গ বাছাই করুন',
+        )
         .required(),
-      maritalStatus: yup
-        .mixed()
-        .oneOf(maritalStatusLists.map((el) => el.value))
-        .required(),
+      maritalStatus: yup.mixed().oneOf(
+        maritalStatusLists.map((el) => el.value),
+        'বৈবাহিক অবস্থা বাছাই করুন',
+      ),
       educationalQualification: yup.string(),
       department: yup
         .mixed()
@@ -259,53 +278,49 @@ const DemographicInformation = ({ navigation, route }) => {
     }
   };
 
+  const showModal = async () => {
+    const validate = await validatePayload(formFields);
+    if (!validate.success) {
+      errorLog(validate.error);
+      return;
+    }
+    setModalVisible(true);
+  };
+
   const handleSubmit = async () => {
     try {
-      const validate = await validatePayload(formFields);
-      if (!validate.success) {
-        ToastAndroid.showWithGravity(
-          validate.error,
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
-        return;
-      }
-      const { accessToken } = await getTokenFromAS();
       const headers = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       };
-      const response = await axios.post(
+      setIsLoading(true);
+      await axios.post(
         `${baseUrl}/accounts/add-demographic-info`,
         formFields,
         { headers },
       );
-      await storeInStorage(AS.IS_ACCOUNT_VERIFIED, true);
       navigation.navigate('Homepage');
+      await accountVerifiedAction();
     } catch (error) {
-      logger.error(error);
-      ToastAndroid.showWithGravity(
-        error?.response?.data?.errors[0]?.message,
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
+      errorLog(error?.response?.data?.errors[0]?.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <ScrollView>
-      <View style={{ flex: 1 }}>
-        <ImageBackground
-          source={require('../../assests/images/loginSignup.jpg')}
-          style={styles.imageBackground}
-        >
-          <LinearGradient
-            colors={['#525252', '#757575']}
-            start={[0, 0]}
-            end={[1, 1]}
-            style={styles.linearGradient}
-          ></LinearGradient>
-
+    <View style={{ backgroundColor: 'green', flex: 1 }}>
+      <ImageBackground
+        source={require('../../assests/images/loginSignup.jpg')}
+        style={styles.imageBackground}
+      >
+        <LinearGradient
+          colors={['#525252', '#757575']}
+          start={[0, 0]}
+          end={[1, 1]}
+          style={styles.linearGradient}
+        ></LinearGradient>
+        <ScrollView>
           <View>
             <View
               style={{
@@ -325,7 +340,6 @@ const DemographicInformation = ({ navigation, route }) => {
                 ব্যাক্তিগত তথ্যাবলী
               </Text>
             </View>
-
             <View style={styles.inputBlockContainer}>
               <TextInput
                 autoCapitalize="none"
@@ -443,7 +457,6 @@ const DemographicInformation = ({ navigation, route }) => {
                 style={{ borderRadius: 10 }}
               />
             </View>
-
             <View style={styles.inputBlockContainer}>
               <Picker
                 width="100%"
@@ -526,13 +539,6 @@ const DemographicInformation = ({ navigation, route }) => {
               </View>
             )}
             <View style={styles.registerButtonContainer}>
-              {isLoading && (
-                <ActivityIndicator
-                  size={50}
-                  color={colors.primary}
-                  style={{ paddingBottom: 25 }}
-                />
-              )}
               <AppButton
                 title="একাউন্ট তৈরি করুন"
                 textStyle={styles.buttonText}
@@ -540,24 +546,27 @@ const DemographicInformation = ({ navigation, route }) => {
                   borderRadius: 10,
                   width: '94%',
                   marginTop: 3,
+                  backgroundColor: '#5caf7a',
                 }}
-                onPress={handleSubmit}
+                onPress={showModal}
               />
             </View>
           </View>
-          <Modal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            title={'সিসিফাস'}
-            description={
-              'ব্যাতিক্রমধর্মী কাজগুলো বাংলাদেশে কিছুটা নতুন। এই মোবাইল এপ্লিকেশনটি এমনি একটা ব্যাতিক্রমধর্মী কাজ যাতে আপনার মানসিক স্বাস্থ্যের অবস্থা যাচাই ও উন্নয়নের কিছু সহজ পদ্ধতি প্রদান করা হবে। আপনি যেই তথ্যগুলো প্রদান করবেন তা আমাদের কাছে খুবই গুরুত্বপূর্ণ এবং অত্যন্ত সতর্কতার সাথে তথ্যগুলোর গোপনীয়তা বজায় রাখা হবে। পরিচয় সম্পূর্ণ গোপন রেখে এই এপ্লিকেশনটির ব্যবহারকারীদের তথ্যগুলো একটি গবেষনা কাজে ব্যবহৃত হবে। এই তথ্য গুলো বিশ্লেষণ করার জন্য কেবলমাত্র তিন জন গবেষক ব্যতিত অন্যকেউ দেখতে পাবে না। অনুগ্রহ করে প্রশ্নের উত্তর ও রেটিং গুলো মনোযোগ সহকারে প্রদান করুন।'
-            }
-            onPress={handleSubmit}
-            navigateTo={'Homepage'}
-          />
-        </ImageBackground>
-      </View>
-    </ScrollView>
+        </ScrollView>
+
+        <Modal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          isLoading={isLoading}
+          title={'সিসিফাস'}
+          description={
+            'ব্যাতিক্রমধর্মী কাজগুলো বাংলাদেশে কিছুটা নতুন। এই মোবাইল এপ্লিকেশনটি এমনি একটা ব্যাতিক্রমধর্মী কাজ যাতে আপনার মানসিক স্বাস্থ্যের অবস্থা যাচাই ও উন্নয়নের কিছু সহজ পদ্ধতি প্রদান করা হবে। আপনি যেই তথ্যগুলো প্রদান করবেন তা আমাদের কাছে খুবই গুরুত্বপূর্ণ এবং অত্যন্ত সতর্কতার সাথে তথ্যগুলোর গোপনীয়তা বজায় রাখা হবে। পরিচয় সম্পূর্ণ গোপন রেখে এই এপ্লিকেশনটির ব্যবহারকারীদের তথ্যগুলো একটি গবেষনা কাজে ব্যবহৃত হবে। এই তথ্য গুলো বিশ্লেষণ করার জন্য কেবলমাত্র তিন জন গবেষক ব্যতিত অন্যকেউ দেখতে পাবে না। অনুগ্রহ করে প্রশ্নের উত্তর ও রেটিং গুলো মনোযোগ সহকারে প্রদান করুন।'
+          }
+          onPress={handleSubmit}
+          navigateTo={'Homepage'}
+        />
+      </ImageBackground>
+    </View>
   );
 };
 
@@ -588,4 +597,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export { DemographicInformation };
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isAccountVerified: state.auth.isAccountVerified,
+  accessToken: state.auth.accessToken,
+  refreshToken: state.auth.refreshToken,
+});
+
+export default connect(mapStateToProps, {
+  accountVerifiedAction,
+})(DemographicInformation);

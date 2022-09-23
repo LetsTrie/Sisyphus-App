@@ -105,10 +105,7 @@ const ScaleComponent = ({
                 paddingTop: 5,
               }}
             >
-              <ActivityIndicator
-                size="large"
-                color={colors.primary}
-              />
+              <ActivityIndicator size="large" color={'#52a871'} />
             </View>
           ) : (
             <>
@@ -143,6 +140,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     lineHeight: 28,
     fontWeight: '700',
+    color: '#1a3624',
   },
   twoButtons: {
     flexDirection: 'row',

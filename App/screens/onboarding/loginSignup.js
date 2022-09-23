@@ -42,8 +42,6 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
     scopes: ['openid', 'profile', 'email'],
   });
 
-  console.log(request, response, promptAsync);
-
   useEffect(() => {
     navigateAfterLogin(
       navigation,
@@ -79,15 +77,15 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
     if (!hasRedirected) promptAsync();
   };
 
-  const handleLogout = async () => {
-    await logoutAction();
+  // const handleLogout = async () => {
+  //   await logoutAction();
 
-    ToastAndroid.showWithGravity(
-      'আপনি সফলভাবে লগআউট করেছেন!',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-  };
+  //   ToastAndroid.showWithGravity(
+  //     'আপনি সফলভাবে লগআউট করেছেন!',
+  //     ToastAndroid.SHORT,
+  //     ToastAndroid.CENTER,
+  //   );
+  // };
 
   return (
     <>
@@ -111,7 +109,7 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
             {isLoading && (
               <ActivityIndicator
                 size={50}
-                color={colors.primary}
+                color={'#52a871'}
                 style={{ paddingBottom: 25 }}
               />
             )}
@@ -123,12 +121,12 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
                   textStyle={styles.buttonText}
                   onPress={handlePress}
                 />
-                <AppButton
+                {/* <AppButton
                   title="লগ আউট"
                   style={styles.buttonStyle}
                   textStyle={styles.buttonText}
                   onPress={handleLogout}
-                />
+                /> */}
               </View>
             ) : (
               <View>

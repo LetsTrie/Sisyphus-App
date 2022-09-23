@@ -1,4 +1,8 @@
-import { SIGN_IN, SIGN_OUT } from '../actions/types';
+import {
+  SIGN_IN,
+  SIGN_OUT,
+  ACCOUNT_VERIFIED,
+} from '../actions/types';
 
 const initialState = {
   isAuthenticated: false,
@@ -28,6 +32,12 @@ export default function (state = initialState, action) {
 
     case SIGN_OUT:
       return { ...initialState };
+
+    case ACCOUNT_VERIFIED:
+      return {
+        ...state,
+        isAccountVerified: true,
+      };
 
     default:
       return state;

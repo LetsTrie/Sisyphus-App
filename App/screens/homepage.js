@@ -15,8 +15,11 @@ import { AntDesign } from '@expo/vector-icons';
 import SpecialIssuesData from './specificIssues/data';
 import { AppButton } from '../components/button';
 import { clearStorage } from '../helpers/asyncStorage';
+import { logoutAction } from '../redux/actions/authActions';
+import { connect } from 'react-redux';
 
-const Homepage = ({ navigation }) => {
+const Homepage = ({ navigation, ...props }) => {
+  const { logoutAction } = props;
   const windowHeight = Dimensions.get('window').height;
   const emoji = [
     { icon: '😍', label: 'Great' },
@@ -32,7 +35,7 @@ const Homepage = ({ navigation }) => {
     useState(false);
 
   const logoutFromApp = async () => {
-    await clearStorage();
+    await logoutAction();
     navigation.navigate('LoginSignup');
   };
 
@@ -461,8 +464,13 @@ const Homepage = ({ navigation }) => {
             </TouchableWithoutFeedback>
           </View>
         </View>
-        <View>
-          <AppButton title="Logout" onPress={logoutFromApp} />
+        <View style={{ marginVertical: 8 }}>
+          <AppButton
+            title="লগ আউট করুন"
+            onPress={logoutFromApp}
+            style={{ backgroundColor: '#52a871' }}
+            textStyle={{ fontSize: 18 }}
+          />
         </View>
       </ScrollView>
     </View>
@@ -596,4 +604,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Homepage };
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  isAccountVerified: state.auth.isAccountVerified,
+  accessToken: state.auth.accessToken,
+  refreshToken: state.auth.refreshToken,
+});
+
+export default connect(mapStateToProps, { logoutAction })(Homepage);
