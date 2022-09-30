@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Modal,
-  Button,
   TouchableOpacity,
   FlatList,
 } from 'react-native';

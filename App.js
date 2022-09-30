@@ -1,14 +1,11 @@
 import { useEffect, useCallback } from 'react';
-import { Button, View, Text } from 'react-native';
-import AppLoading from 'expo-app-loading';
-
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-
-import { store, persistor } from './App/redux/store';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HeaderBackButton } from '@react-navigation/elements';
+
+import { store, persistor } from './App/redux/store';
 
 import { ScreenContainer } from './App/components/screenContainer';
 import LoginSignupComponent from './App/screens/onboarding/loginSignup';
@@ -19,17 +16,14 @@ import { SpecificIssues } from './App/screens/specificIssues';
 import AssessmentList from './App/screens/assessments/AssessmentList.js';
 import Scale from './App/screens/assessments/Scale';
 import Result from './App/screens/assessments/Result';
-import { ScaleDescriptionPage } from './App/screens/assessments/ScaleDescriptionPage';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import colors from './App/config/colors';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [fontsLoaded, error] = useFonts({
+  const [fontsLoaded, _] = useFonts({
     'poppins-bold': require('./App/assests/fonts/Poppins/Poppins-Bold.ttf'),
     'poppins-regular': require('./App/assests/fonts/Poppins/Poppins-Regular.ttf'),
     'playfair-black': require('./App/assests/fonts/PlayfairDisplay/PlayfairDisplay-Black.ttf'),
@@ -101,6 +95,15 @@ export default function App() {
                 component={AssessmentList}
                 options={({ navigation }) => ({
                   title: 'নিজেকে মূল্যায়ন করুন',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate('Homepage');
+                      }}
+                    />
+                  ),
                 })}
               />
 
@@ -124,7 +127,16 @@ export default function App() {
                 name="ScaleResult"
                 component={Result}
                 options={({ navigation }) => ({
-                  title: 'Scale Result',
+                  title: 'ফলাফল',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate('Homepage');
+                      }}
+                    />
+                  ),
                 })}
               />
             </Stack.Navigator>

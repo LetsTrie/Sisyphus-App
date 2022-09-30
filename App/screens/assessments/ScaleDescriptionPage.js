@@ -1,11 +1,5 @@
-import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState } from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { AppButton } from '../../components/button';
 import Text from '../../components/text';
 import { useNavigation } from '@react-navigation/native';

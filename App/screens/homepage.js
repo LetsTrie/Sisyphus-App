@@ -6,28 +6,38 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
-  TouchableHighlight,
   TouchableWithoutFeedback,
+  BackHandler,
 } from 'react-native';
-import { Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { AntDesign } from '@expo/vector-icons';
 import SpecialIssuesData from './specificIssues/data';
 import { AppButton } from '../components/button';
-import { clearStorage } from '../helpers/asyncStorage';
 import { logoutAction } from '../redux/actions/authActions';
 import { connect } from 'react-redux';
+import { getUserInformations } from '../services/user';
+import { errorLog } from '../helpers/log';
 
 const Homepage = ({ navigation, ...props }) => {
+  const [username, setUsername] = useState('');
   const { logoutAction } = props;
-  const windowHeight = Dimensions.get('window').height;
   const emoji = [
-    { icon: '😍', label: 'Great' },
-    { icon: '😇', label: 'Good' },
-    { icon: '😊', label: 'Ok' },
-    { icon: '😞', label: 'Bad' },
-    { icon: '😣', label: 'Awful' },
+    {
+      icon: '😍',
+      label: 'Great',
+      banglaLabel: 'খুব ভালো',
+      weight: 60,
+    },
+    { icon: '😇', label: 'Good', banglaLabel: 'ভালো', weight: 60 },
+    { icon: '😊', label: 'Ok', banglaLabel: 'মোটামুটি', weight: 60 },
+    { icon: '😞', label: 'Bad', banglaLabel: 'ভালো নেই', weight: 60 },
+    {
+      icon: '😣',
+      label: 'Awful',
+      banglaLabel: 'একদম ভালো নেই',
+      weight: 60,
+    },
   ];
+  //
 
   const [isPressedOnSpecificIssues, setIsPressedOnSpecificIssues] =
     useState(false);
@@ -39,12 +49,48 @@ const Homepage = ({ navigation, ...props }) => {
     navigation.navigate('LoginSignup');
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const { googleFirstName, name, ...userInfo } =
+          await getUserInformations(props.accessToken);
+        const cap1stLetter = (string) => {
+          if (!string) return string;
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        };
+        const nameOfUser = cap1stLetter(googleFirstName || name);
+        setUsername(nameOfUser);
+      } catch (error) {
+        await logoutFromApp();
+        errorLog(error.toString());
+      }
+    })();
+  }, []);
+
+  function handleBackButtonClick() {
+    navigation.navigate('LoginSignup');
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackButtonClick,
+    );
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
+
   return (
     <View>
       <ScrollView>
         <View
           style={{
-            height: (windowHeight / 2) * (3.8 / 5),
+            // minHeight: (windowHeight / 2) * (3.8 / 5) - 5,
             backgroundColor: '#479162',
             borderBottomRightRadius: 24,
             borderBottomLeftRadius: 24,
@@ -54,34 +100,34 @@ const Homepage = ({ navigation, ...props }) => {
             shadowColor: 'black',
             shadowOffset: 50,
             elevation: 2,
+            paddingBottom: 25,
           }}
         >
           <Text
             style={{
-              fontSize: 45,
+              fontSize: 35,
               padding: 10,
               paddingBottom: 6,
-              // fontWeight: 'bold',
               color: '#fffef4',
               fontFamily: 'playfair-bold',
               textAlign: 'center',
             }}
           >
-            Hi Sakib!
+            Hi {username}!
           </Text>
           <Text
             style={{
-              fontSize: 19,
+              fontSize: 20,
               padding: 12,
               paddingVertical: 2,
               letterSpacing: 0.4,
               textAlign: 'center',
               fontFamily: 'Roboto',
-              marginBottom: 20,
+              marginBottom: 17,
               color: '#fffef4',
             }}
           >
-            How are you feeling today?
+            আপনি আজ কেমন আছেন?
           </Text>
           <View
             style={{
@@ -96,28 +142,48 @@ const Homepage = ({ navigation, ...props }) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                   backgroundColor: 'white',
-                  height: 61,
-                  width: 57,
+                  width: em.weight,
                   marginRight: 8,
                   borderRadius: 10,
                   elevation: 10,
                   shadowOffset: 50,
                   shadowColor: 'black',
                   borderColor: '#483838',
+                  paddingBottom: 3.5,
                 }}
               >
-                <Text style={{ fontSize: 22, paddingBottom: 3 }}>
-                  {em.icon}
-                </Text>
                 <Text
                   style={{
-                    fontSize: 12,
-                    fontWeight: 'bold',
-                    color: '#483838',
+                    fontSize: 22,
+                    paddingBottom: 1.2,
+                    paddingTop: 6,
                   }}
                 >
-                  {em.label}
+                  {em.icon}
                 </Text>
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignSelf: 'center',
+                    height: 30,
+                    marginBottom: 2,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11,
+                      color: '#483838',
+                      textAlign: 'center',
+
+                      paddingHorizontal: 2,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {em.banglaLabel}
+                  </Text>
+                </View>
               </TouchableOpacity>
             ))}
           </View>
@@ -162,16 +228,16 @@ const Homepage = ({ navigation, ...props }) => {
                   >
                     <View style={styles.featureLeftImage}>
                       <ImageBackground
-                        source={require('../assests/images/assessment.webp')}
+                        source={require('../assests/images/assessment.png')}
                         style={styles.imageBackground}
                       ></ImageBackground>
                     </View>
                     <View>
                       <Text style={styles.featureHeading}>
-                        Assessments
+                        মানসিক অবস্থা যাচাই
                       </Text>
                       <Text style={styles.featureSubheading}>
-                        Fast and Easy Exercise
+                        সেলফ এসেসমেন্ট
                       </Text>
                     </View>
                   </View>
@@ -218,7 +284,7 @@ const Homepage = ({ navigation, ...props }) => {
                             : styles.featureHeadingPressed,
                         ]}
                       >
-                        Psychoeducation
+                        মানসিক স্বাস্থ্য সম্পর্কিত তথ্য
                       </Text>
                       <Text
                         style={[
@@ -256,13 +322,14 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Mental Health
+                        মানসিক স্বাস্থ্য
                       </Text>
                     </TouchableOpacity>
                   </View>
                 )}
               </View>
             </TouchableWithoutFeedback>
+
             <TouchableWithoutFeedback
               onPress={() =>
                 setIsPressedOnSpecificIssues((prev) => !prev)
@@ -282,7 +349,7 @@ const Homepage = ({ navigation, ...props }) => {
                   >
                     <View style={styles.featureLeftImage}>
                       <ImageBackground
-                        source={require('../assests/images/specificIssues.png')}
+                        source={require('../assests/images/specificissues.png')}
                         style={styles.imageBackground}
                       ></ImageBackground>
                     </View>
@@ -295,7 +362,7 @@ const Homepage = ({ navigation, ...props }) => {
                             : styles.featureHeadingPressed,
                         ]}
                       >
-                        Specific Issues
+                        নির্দিষ্ট কিছু বিষয়
                       </Text>
                       <Text
                         style={[
@@ -340,7 +407,7 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Relationship
+                        প্রিয়জনের সাথে সম্পর্কের উন্নয়ন
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -353,7 +420,7 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Education
+                        পড়াশোনা সম্পর্কিত দক্ষতা
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -366,7 +433,7 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Anger
+                        রাগ ব্যবস্থাপনা
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -379,7 +446,7 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Stress
+                        চাপ নিরসন
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -392,13 +459,27 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        Suicidal Ideation
+                        ঘুম
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        আত্নহত্যা প্রবণতা প্রতিরোধ
                       </Text>
                     </TouchableOpacity>
                   </View>
                 )}
               </View>
             </TouchableWithoutFeedback>
+
             <TouchableWithoutFeedback>
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
@@ -413,7 +494,7 @@ const Homepage = ({ navigation, ...props }) => {
                     </View>
                     <View>
                       <Text style={styles.featureHeading}>
-                        Generic Intervention
+                        সংক্ষিপ্ত কিছু কৌশল
                       </Text>
                       <Text style={styles.featureSubheading}>
                         Fast and Easy Exercise
@@ -439,13 +520,13 @@ const Homepage = ({ navigation, ...props }) => {
                   >
                     <View style={styles.featureLeftImage}>
                       <ImageBackground
-                        source={require('../assests/images/quickRelief.jpg')}
+                        source={require('../assests/images/quickrelief.jpeg')}
                         style={styles.imageBackground}
                       ></ImageBackground>
                     </View>
                     <View>
                       <Text style={styles.featureHeading}>
-                        Quick Relief
+                        তাৎক্ষনিক উপশম
                       </Text>
                       <Text style={styles.featureSubheading}>
                         Fast and Easy Exercise
@@ -541,13 +622,18 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     padding: 10,
 
-    shadowColor: '#3c7a53',
     borderColor: '#3c7a53',
     borderRadius: 5,
     borderWidth: 0,
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 2,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 1,
   },
   eachFeatureContainerPress: {
     borderColor: '#52a872',
@@ -566,7 +652,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   featureHeading: {
-    fontSize: 16.5,
+    fontSize: 15.5,
     marginBottom: 2,
     paddingLeft: 4,
     paddingTop: 1,
@@ -601,6 +687,7 @@ const styles = StyleSheet.create({
   subsectionContainerText: {
     paddingLeft: 5,
     fontSize: 15,
+    color: '#333',
   },
 });
 

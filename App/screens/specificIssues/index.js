@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import { Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { AntDesign } from '@expo/vector-icons';
+import React from 'react';
+import { Text, View, ScrollView } from 'react-native';
 
 import styles from './styles';
 
-const SpecificIssues = ({ navigation, route }) => {
+const SpecificIssues = ({ route }) => {
   const data = route?.params?.data?.data ?? [];
   const headerText = route?.params?.data?.name;
 

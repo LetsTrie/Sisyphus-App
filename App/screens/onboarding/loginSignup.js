@@ -10,7 +10,6 @@ import {
 import styles from './loginSignup.styles';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
-import colors from '../../config/colors';
 import { connect } from 'react-redux';
 import {
   loginAction,
@@ -77,15 +76,15 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
     if (!hasRedirected) promptAsync();
   };
 
-  // const handleLogout = async () => {
-  //   await logoutAction();
+  const handleLogout = async () => {
+    await logoutAction();
 
-  //   ToastAndroid.showWithGravity(
-  //     'আপনি সফলভাবে লগআউট করেছেন!',
-  //     ToastAndroid.SHORT,
-  //     ToastAndroid.CENTER,
-  //   );
-  // };
+    ToastAndroid.showWithGravity(
+      'আপনি সফলভাবে লগআউট করেছেন!',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+  };
 
   return (
     <>
@@ -106,45 +105,48 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
           </View>
 
           <View style={styles.loginSignupButtonContainer}>
-            {isLoading && (
+            {isLoading ? (
               <ActivityIndicator
                 size={50}
                 color={'#52a871'}
                 style={{ paddingBottom: 25 }}
               />
-            )}
-            {props.isAuthenticated ? (
-              <View>
-                <AppButton
-                  title="অ্যাপে প্রবেশ করুন"
-                  style={styles.buttonStyle}
-                  textStyle={styles.buttonText}
-                  onPress={handlePress}
-                />
-                {/* <AppButton
-                  title="লগ আউট"
-                  style={styles.buttonStyle}
-                  textStyle={styles.buttonText}
-                  onPress={handleLogout}
-                /> */}
-              </View>
             ) : (
-              <View>
-                <AppButton
-                  title="লগিন করুন"
-                  style={styles.buttonStyle}
-                  textStyle={styles.buttonText}
-                  disabled={!request}
-                  onPress={handlePress}
-                />
-                <AppButton
-                  title="একাউন্ট তৈরি করুন"
-                  style={styles.buttonStyle}
-                  textStyle={styles.buttonText}
-                  disabled={!request}
-                  onPress={handlePress}
-                />
-              </View>
+              <>
+                {props.isAuthenticated ? (
+                  <View>
+                    <AppButton
+                      title="অ্যাপে প্রবেশ করুন"
+                      style={styles.buttonStyle}
+                      textStyle={styles.buttonText}
+                      onPress={handlePress}
+                    />
+                    <AppButton
+                      title="লগ আউট"
+                      style={styles.buttonStyle}
+                      textStyle={styles.buttonText}
+                      onPress={handleLogout}
+                    />
+                  </View>
+                ) : (
+                  <View>
+                    <AppButton
+                      title="লগিন করুন"
+                      style={styles.buttonStyle}
+                      textStyle={styles.buttonText}
+                      disabled={!request}
+                      onPress={handlePress}
+                    />
+                    <AppButton
+                      title="একাউন্ট তৈরি করুন"
+                      style={styles.buttonStyle}
+                      textStyle={styles.buttonText}
+                      disabled={!request}
+                      onPress={handlePress}
+                    />
+                  </View>
+                )}
+              </>
             )}
           </View>
         </ImageBackground>

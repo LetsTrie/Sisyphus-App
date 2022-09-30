@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import {
   View,
-  Text,
-  TouchableOpacity,
   ScrollView,
   StyleSheet,
-  BackHandler,
   Modal,
-  StatusBar,
+  BackHandler,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import scale from '../../data/scales';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import axios from 'axios';
 import Box from '../../components/Scale/Box';
 import { connect } from 'react-redux';
-import { errorLog } from '../../helpers/log';
-
 import { useHeaderHeight } from '@react-navigation/elements';
-
-import { latestScaleUpdate } from '../../services/scale';
 import { getLatestProgress } from '../../redux/actions/scaleActions';
 import { ScaleDescriptionPage } from './ScaleDescriptionPage';
+import { engToBanNumConversion } from '../../helpers/utils';
 
 const AssessmentList = ({ navigation, route, ...props }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,7 +25,6 @@ const AssessmentList = ({ navigation, route, ...props }) => {
 
   const boxes = [
     {
-      photoUrl: require('../../assests/images/doctorUsingPhone.jpeg'),
       title: 'Depression',
       banglaTitle: 'বিষন্নতা নির্ণয়',
       scaleId: 'DS-1',
@@ -43,7 +32,6 @@ const AssessmentList = ({ navigation, route, ...props }) => {
       description: `এখানে ৩৬ টি প্রশ্নবিশিষ্ট স্কেল রয়েছে যার মাধ্যমে খুব সহজেই আপনি আপনার দুশ্চিন্তা পরিমাপ করতে পারেন।\n\nএই স্কেলটি ডেভেলপ করেছেন জহির উদ্দীন ও ড. মাহমুদুর রহমান`,
     },
     {
-      photoUrl: require('../../assests/images/doctorUsingPhone.jpeg'),
       title: 'Anxiety',
       banglaTitle: 'দুশ্চিন্তা নির্ণয়',
       scaleId: 'ANX-1',
@@ -51,7 +39,6 @@ const AssessmentList = ({ navigation, route, ...props }) => {
       description: `এখানে ৩৬ টি প্রশ্নবিশিষ্ট স্কেল রয়েছে যার মাধ্যমে খুব সহজেই আপনি আপনার দুশ্চিন্তা পরিমাপ করতে পারেন।\n\nএই স্কেলটি ডেভেলপ করেছেন ড. ফারাহ দিবা`,
     },
     {
-      photoUrl: require('../../assests/images/doctorUsingPhone.jpeg'),
       title: 'WHO-5 wellbeing index',
       banglaTitle: 'ওয়েলবিং নির্ণয়',
       scaleId: 'WHO-1',
@@ -59,7 +46,6 @@ const AssessmentList = ({ navigation, route, ...props }) => {
       description: `এখানে ৫ টি প্রশ্নবিশিষ্ট স্কেল রয়েছে যার মাধ্যমে খুব সহজেই আপনি আপনার ওয়েলবিং পরিমাপ করতে পারেন।\n\nএই স্কেলটি বাংলা অনুবাদ করেছেন ওমর ফারুক ও কামাল উদ্দিন আহমেদ চৌধুরী`,
     },
     {
-      photoUrl: require('../../assests/images/doctorUsingPhone.jpeg'),
       title: 'Perceived Stress Scale',
       banglaTitle: 'মানসিক চাপ নির্ণয়',
       scaleId: 'PSS-1',
@@ -67,6 +53,24 @@ const AssessmentList = ({ navigation, route, ...props }) => {
       description: `এখানে ১০ টি প্রশ্নবিশিষ্ট একটি স্কেল রয়েছে যার মাধ্যমে খুব সহজেই আপনি আপনার মানসিক চাপ পরিমাপ করতে পারেন।\n\nএই স্কেলটি বাংলা অনুবাদ করেছেন মোঃ জিয়াউল ইসলাম`,
     },
   ];
+
+  function handleBackButtonClick() {
+    navigation.navigate('LoginSignup');
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackButtonClick,
+    );
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   const handlePress = (box) => {
     setModalVisible(true);
@@ -84,11 +88,10 @@ const AssessmentList = ({ navigation, route, ...props }) => {
         {boxes.map((box) => (
           <View key={box.scaleId}>
             <Box
-              source={box.photoUrl}
               name={box.banglaTitle}
               lastScore={
                 progress[box.scaleId]
-                  ? progress[box.scaleId].score
+                  ? engToBanNumConversion(progress[box.scaleId].score)
                   : undefined
               }
               lastDate={

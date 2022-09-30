@@ -1,14 +1,11 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
-  ImageBackground,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import Text from '../text';
-import colors from '../../config/colors';
 
 const monthShortName = [
   'Jan',
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   lastScoreValue: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '700',
   },
   lastDateContainer: {

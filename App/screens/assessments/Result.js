@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
@@ -6,22 +5,14 @@ import {
   Text,
   StyleSheet,
   BackHandler,
-  TouchableOpacity,
 } from 'react-native';
-import { errorLog } from '../../helpers/log';
-
-import { ScaleComponent } from '../../components/Scale/Scales';
-import { chooseScale } from '../../helpers/chooseScale';
-import { submitScale } from '../../services/scale';
 import { connect } from 'react-redux';
-import { getLatestProgress } from '../../redux/actions/scaleActions';
-
 import { AppButton } from '../../components/button';
 import colors from '../../config/colors';
 
-const Result = ({ navigation, route, ...props }) => {
-  const [isLoading, setIsLoading] = useState(false);
+import { engToBanNumConversion } from '../../helpers/utils';
 
+const Result = ({ navigation, route, ...props }) => {
   const { score, stage, type, totalScore } = route.params;
 
   let mtype;
@@ -72,7 +63,9 @@ const Result = ({ navigation, route, ...props }) => {
                 : styles.scoreTextContainerRed
             }
           >
-            <Text style={styles.scoreText}> {score}</Text>
+            <Text style={styles.scoreText}>
+              {engToBanNumConversion(score)}
+            </Text>
           </View>
           <View
             style={{
@@ -100,6 +93,15 @@ const Result = ({ navigation, route, ...props }) => {
                 ? `আপনার ${mtype} মাঝামাঝি মাত্রায় রয়েছে। এই অবস্থার গুনগত মান উন্নয়নের জন্য অ্যাপসের ভিডিওগুলো দেখুন ও অনুশীলন করুন। `
                 : `আপনার ${mtype} তীব্র মাত্রায় রয়েছে । এই অবস্থার গুনগত মান উন্নয়নের জন্য অ্যাপসের মাধ্যমে দ্রুত সময়ের মধ্যে মানসিক স্বাস্থ্য সেবা প্রফেশনালদের সাথে যোগাযোগ করুন। পাশাপাশি অ্যাপসের ভিডিওগুলো দেখুন ও অনুশীলন করুন।`}
             </Text>
+          </View>
+
+          <View>
+            <AppButton
+              title="হোমপেজে ফিরে যান"
+              style={{ backgroundColor: '#479162' }}
+              textStyle={{ fontSize: 18 }}
+              onPress={handleBackButtonClick}
+            />
           </View>
         </View>
       </ScrollView>

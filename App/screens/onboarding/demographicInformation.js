@@ -5,16 +5,10 @@ import {
   Text,
   View,
   ImageBackground,
-  ActivityIndicator,
   ScrollView,
-  ToastAndroid,
 } from 'react-native';
-import * as Google from 'expo-auth-session/providers/google';
-import * as WebBrowser from 'expo-web-browser';
 import * as yup from 'yup';
 import axios from 'axios';
-import logger from '../../config/logger';
-import colors from '../../config/colors';
 import TextInput from '../../components/textInput';
 import Picker from '../../components/picker';
 import Modal from '../../components/modal';
@@ -23,17 +17,8 @@ import baseUrl from '../../config/baseUrl';
 import { accountVerifiedAction } from '../../redux/actions/authActions';
 import { errorLog } from '../../helpers/log';
 
-import {
-  googleAndroidClientId,
-  expoWebClientId,
-} from '../../config/config';
 import { AppButton } from '../../components/button';
-import { useNavigation } from '@react-navigation/native';
-import {
-  getTokenFromAS,
-  storeInStorage,
-} from '../../helpers/asyncStorage';
-import AS from '../../types/asyncStorage';
+
 import { connect } from 'react-redux';
 
 const genderLists = [
@@ -155,13 +140,7 @@ const treatmentLists = [
 ];
 
 const DemographicInformation = ({ navigation, route, ...props }) => {
-  const {
-    isAuthenticated,
-    isAccountVerified,
-    accessToken,
-    refreshToken,
-    accountVerifiedAction,
-  } = props;
+  const { accessToken, accountVerifiedAction } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -194,6 +173,7 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
     gender: '',
     maritalStatus: '',
     educationalQualification: '',
+    duEmail: '',
     department: '',
     year: '',
     residentialStatus: '',
@@ -222,11 +202,6 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
     }
   }, [physicalHealthProblemHistory]);
 
-  // const headers = {
-  //   'Content-Type': 'application/json',
-  //   Authorization: `Bearer ${props.jwtToken}`,
-  // };
-
   const validatePayload = async (body) => {
     let validationSchema = yup.object().shape({
       name: yup.string().min(1, 'নাম পূরণ করুন').required(),
@@ -248,6 +223,10 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
         'বৈবাহিক অবস্থা বাছাই করুন',
       ),
       educationalQualification: yup.string(),
+      duEmail: yup
+        .string('ঢাকা বিশ্ববিদ্যালয়ের ইমেইল প্রদান করুন')
+        .email('ঢাকা বিশ্ববিদ্যালয়ের ইমেইল প্রদান করুন')
+        .required('ঢাকা বিশ্ববিদ্যালয়ের ইমেইল প্রদান করুন'),
       department: yup
         .mixed()
         .oneOf(['', ...departmentList.map((el) => el.value)]),
@@ -402,6 +381,21 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
               <TextInput
                 autoCapitalize="none"
                 autoCorrect={false}
+                icon="email"
+                name="duEmail"
+                placeholder="ঢাকা বিশ্ববিদ্যালয় ইমেইল"
+                onChangeText={(text) =>
+                  createChangeHandler(text, 'duEmail')
+                }
+                textContentType="none"
+                style={{ borderRadius: 10 }}
+                width="100%"
+              />
+            </View>
+            <View style={styles.inputBlockContainer}>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
                 icon="account"
                 name="educationalQualification"
                 placeholder="শিক্ষাগত যোগ্যতা"
@@ -427,6 +421,7 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
                 style={{ borderRadius: 10 }}
               />
             </View>
+
             <View style={styles.inputBlockContainer}>
               <Picker
                 width="100%"

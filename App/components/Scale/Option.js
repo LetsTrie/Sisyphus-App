@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import Text from '../text';
 import { RadioButton } from 'react-native-paper';
-import colors from '../../config/colors';
 
 const Option = ({
   question,

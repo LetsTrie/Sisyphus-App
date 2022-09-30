@@ -476,7 +476,7 @@ export default [
         options: getAnswersAnxiety([0, 1, 2, 3, 4]),
       },
       {
-        question: 'আমার মাথা  ব্যাথা করে',
+        question: 'আমার মাথা ব্যাথা করে',
         answerType: 'multiple-choice',
         options: getAnswersAnxiety([0, 1, 2, 3, 4]),
       },
@@ -486,7 +486,7 @@ export default [
         options: getAnswersAnxiety([0, 1, 2, 3, 4]),
       },
       {
-        question: 'আমার গলা শুঁকিয়ে যায় ও পিপাসা লাগে',
+        question: 'আমার গলা শুকিয়ে যায় ও পিপাসা লাগে',
         answerType: 'multiple-choice',
         options: getAnswersAnxiety([0, 1, 2, 3, 4]),
       },
