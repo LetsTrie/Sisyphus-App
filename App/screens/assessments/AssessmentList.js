@@ -55,7 +55,7 @@ const AssessmentList = ({ navigation, route, ...props }) => {
   ];
 
   function handleBackButtonClick() {
-    navigation.navigate('LoginSignup');
+    navigation.navigate(route.params.goBack);
     return true;
   }
 

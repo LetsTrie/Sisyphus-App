@@ -3,22 +3,18 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   upperHeaderContainer: {
     backgroundColor: '#479162',
-    paddingTop: 10,
+    paddingTop: 20,
     marginBottom: 15,
     paddingLeft: 7,
     shadowColor: 'black',
     shadowOffset: 50,
     elevation: 2,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
   },
   upperHeaderText: {
-    fontSize: 40,
-    color: '#fffef4',
-    fontFamily: 'playfair-bold',
+    fontSize: 20,
+    color: '#fff',
     textAlign: 'center',
     paddingBottom: 20,
-    letterSpacing: 0.2,
   },
   container: {
     paddingHorizontal: 10,
@@ -29,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingBottom: 8,
     textAlign: 'justify',
-    textDecorationLine: 'underline',
+    // textDecorationLine: 'underline',
   },
   sectionSubHeaderText: {
     fontWeight: 'bold',

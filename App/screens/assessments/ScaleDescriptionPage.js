@@ -12,6 +12,17 @@ const ScaleDescriptionPage = (props) => {
     setTimeout(() => {
       navigation.navigate('ExploreScale', {
         ...props.scale,
+        goBack: 'AssessmentList',
+      });
+    }, 5);
+  };
+
+  const seeHistory = () => {
+    props.closeModal();
+    setTimeout(() => {
+      navigation.navigate('AssessmentResultHistory', {
+        ...props.scale,
+        goBack: 'AssessmentList',
       });
     }, 5);
   };
@@ -38,6 +49,7 @@ const ScaleDescriptionPage = (props) => {
           />
           <AppButton
             title="হিস্ট্রি দেখুন"
+            onPress={seeHistory}
             style={{ backgroundColor: '#52a871' }}
             textStyle={{ fontSize: 17.5 }}
           />

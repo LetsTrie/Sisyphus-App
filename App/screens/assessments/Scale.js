@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, BackHandler } from 'react-native';
 import { errorLog } from '../../helpers/log';
 
 import { ScaleComponent } from '../../components/Scale/Scales';
@@ -72,6 +72,24 @@ const Scale = ({ navigation, route, ...props }) => {
       })();
     }
   }, [submitted]);
+
+  function handleBackButtonClick() {
+    navigation.navigate(route.params.goBack);
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackButtonClick,
+    );
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>

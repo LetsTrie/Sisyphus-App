@@ -17,6 +17,8 @@ import { connect } from 'react-redux';
 import { getUserInformations } from '../services/user';
 import { errorLog } from '../helpers/log';
 
+const screenName = 'Homepage';
+
 const Homepage = ({ navigation, ...props }) => {
   const [username, setUsername] = useState('');
   const { logoutAction } = props;
@@ -219,7 +221,11 @@ const Homepage = ({ navigation, ...props }) => {
           </View>
           <View style={styles.featureContainer}>
             <TouchableWithoutFeedback
-              onPress={() => navigation.navigate('AssessmentList')}
+              onPress={() =>
+                navigation.navigate('AssessmentList', {
+                  goBack: screenName,
+                })
+              }
             >
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
@@ -397,6 +403,7 @@ const Homepage = ({ navigation, ...props }) => {
                           data: SpecialIssuesData.find(
                             (issue) => issue.name === 'Relationship',
                           ),
+                          goBack: screenName,
                         })
                       }
                     >

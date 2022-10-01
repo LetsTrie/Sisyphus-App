@@ -1,11 +1,29 @@
-import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, ScrollView, BackHandler } from 'react-native';
 
 import styles from './styles';
 
-const SpecificIssues = ({ route }) => {
+const SpecificIssues = ({ route, navigation, ...props }) => {
   const data = route?.params?.data?.data ?? [];
-  const headerText = route?.params?.data?.name;
+  const headerText = route?.params?.data?.banglaName;
+
+  function handleBackButtonClick() {
+    navigation.navigate(route.params.goBack);
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackButtonClick,
+    );
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, []);
 
   const DataContainer = ({ data }) => {
     if (data.header) {

@@ -12,6 +12,7 @@ import LoginSignupComponent from './App/screens/onboarding/loginSignup';
 import DemographicInformation from './App/screens/onboarding/demographicInformation';
 import Homepage from './App/screens/homepage';
 import { SpecificIssues } from './App/screens/specificIssues';
+import AssessmentResultHistory from './App/screens/assessments/AssessmentResultHistory';
 
 import AssessmentList from './App/screens/assessments/AssessmentList.js';
 import Scale from './App/screens/assessments/Scale';
@@ -120,6 +121,15 @@ export default function App() {
                 component={Scale}
                 options={({ navigation, route, ...props }) => ({
                   title: route.params.banglaTitle,
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate(route.params.goBack);
+                      }}
+                    />
+                  ),
                 })}
               />
               {/* Result */}
@@ -134,6 +144,23 @@ export default function App() {
                       style={{ marginLeft: 0 }}
                       onPress={() => {
                         navigation.navigate('Homepage');
+                      }}
+                    />
+                  ),
+                })}
+              />
+
+              <Stack.Screen
+                name="AssessmentResultHistory"
+                component={AssessmentResultHistory}
+                options={({ navigation, route }) => ({
+                  title: 'হিস্ট্রি দেখুন',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate(route.params.goBack);
                       }}
                     />
                   ),

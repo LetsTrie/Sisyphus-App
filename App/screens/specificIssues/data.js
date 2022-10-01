@@ -6,6 +6,7 @@
 export default [
   {
     name: 'Relationship',
+    banglaName: 'প্রিয়জনের সাথে সম্পর্কের উন্নয়ন',
     data: [
       { header: 'সম্পর্ক বলতে আমরা কি বুঝি?' },
       {
