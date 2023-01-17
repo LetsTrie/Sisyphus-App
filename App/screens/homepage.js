@@ -8,14 +8,16 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   BackHandler,
+  ToastAndroid,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import SpecialIssuesData from './specificIssues/data';
+import readingMaterials from './readingMaterials/data';
 import { AppButton } from '../components/button';
 import { logoutAction } from '../redux/actions/authActions';
 import { connect } from 'react-redux';
 import { getUserInformations } from '../services/user';
 import { errorLog } from '../helpers/log';
+import Toast from 'react-native-toast-message';
 
 const screenName = 'Homepage';
 
@@ -28,21 +30,42 @@ const Homepage = ({ navigation, ...props }) => {
       label: 'Great',
       banglaLabel: 'খুব ভালো',
       weight: 60,
+      toasterMessage: 'জেনে ভালো লাগছে যে আপনি আজ খুব ভালো আছেন! 😍',
     },
-    { icon: '😇', label: 'Good', banglaLabel: 'ভালো', weight: 60 },
-    { icon: '😊', label: 'Ok', banglaLabel: 'মোটামুটি', weight: 60 },
-    { icon: '😞', label: 'Bad', banglaLabel: 'ভালো নেই', weight: 60 },
+    {
+      icon: '😇',
+      label: 'Good',
+      banglaLabel: 'ভালো',
+      weight: 60,
+      toasterMessage: 'জেনে ভালো লাগছে যে আপনি আজ ভালো আছেন! 😍',
+    },
+    {
+      icon: '😊',
+      label: 'Ok',
+      banglaLabel: 'মোটামুটি',
+      weight: 60,
+      toasterMessage:
+        'জেনে ভালো লাগছে যে আপনি আজ মোটামুটি ভালো আছেন! 😊',
+    },
+    {
+      icon: '😞',
+      label: 'Bad',
+      banglaLabel: 'ভালো নেই',
+      weight: 60,
+      toasterMessage: 'জেনে খারাপ লাগছে যে আপনি আজ ভালো নেই! 😞',
+    },
     {
       icon: '😣',
       label: 'Awful',
       banglaLabel: 'একদম ভালো নেই',
       weight: 60,
+      toasterMessage: 'জেনে খারাপ লাগছে যে আপনি আজ একদম ভালো নেই! 😞',
     },
   ];
-  //
 
-  const [isPressedOnSpecificIssues, setIsPressedOnSpecificIssues] =
+  const [isPressedOnReadingMaterials, setIsPressedOnReadingMaterials] =
     useState(false);
+
   const [isPressedOnPsychoeducation, setIsPressedOnPsychoEducation] =
     useState(false);
 
@@ -74,6 +97,14 @@ const Homepage = ({ navigation, ...props }) => {
     return true;
   }
 
+  const handleEmojiPress = (emoji) => {
+    ToastAndroid.showWithGravity(
+      emoji.toasterMessage,
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+  };
+
   useEffect(() => {
     BackHandler.addEventListener(
       'hardwareBackPress',
@@ -92,11 +123,10 @@ const Homepage = ({ navigation, ...props }) => {
       <ScrollView>
         <View
           style={{
-            // minHeight: (windowHeight / 2) * (3.8 / 5) - 5,
             backgroundColor: '#479162',
             borderBottomRightRadius: 24,
             borderBottomLeftRadius: 24,
-            paddingTop: 20,
+            paddingTop: 16.5,
             marginBottom: 15,
             paddingLeft: 7,
             shadowColor: 'black',
@@ -153,6 +183,7 @@ const Homepage = ({ navigation, ...props }) => {
                   borderColor: '#483838',
                   paddingBottom: 3.5,
                 }}
+                onPress={() => handleEmojiPress(em)}
               >
                 <Text
                   style={{
@@ -318,8 +349,17 @@ const Homepage = ({ navigation, ...props }) => {
                 </View>
                 {isPressedOnPsychoeducation && (
                   <View style={{ paddingTop: 10, paddingLeft: 0 }}>
+                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'Myths and facts',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
                     >
                       <AntDesign
                         name="arrowright"
@@ -328,9 +368,76 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        মানসিক স্বাস্থ্য
+                        মিথ এবং বাস্তবতা
                       </Text>
                     </TouchableOpacity>
+                     
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'What is mental health',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        মানসিক স্বাস্থ্য বলতে আমরা কি বুঝি?
+                      </Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'What is psychotherapy',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        সাইকো থেরাপি কি? 
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'Mental Health Counselling',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        মানসিক স্বাস্থ্য কাউন্সেলিং
+                      </Text>
+                    </TouchableOpacity>
+
                   </View>
                 )}
               </View>
@@ -338,13 +445,13 @@ const Homepage = ({ navigation, ...props }) => {
 
             <TouchableWithoutFeedback
               onPress={() =>
-                setIsPressedOnSpecificIssues((prev) => !prev)
+                setIsPressedOnReadingMaterials((prev) => !prev)
               }
             >
               <View
                 style={[
                   styles.eachFeatureContainer,
-                  !isPressedOnSpecificIssues
+                  !isPressedOnReadingMaterials
                     ? {}
                     : styles.eachFeatureContainerPress,
                 ]}
@@ -363,7 +470,7 @@ const Homepage = ({ navigation, ...props }) => {
                       <Text
                         style={[
                           styles.featureHeading,
-                          !isPressedOnSpecificIssues
+                          !isPressedOnReadingMaterials
                             ? {}
                             : styles.featureHeadingPressed,
                         ]}
@@ -373,7 +480,7 @@ const Homepage = ({ navigation, ...props }) => {
                       <Text
                         style={[
                           styles.featureSubheading,
-                          isPressedOnSpecificIssues
+                          isPressedOnReadingMaterials
                             ? { color: '#666' }
                             : {},
                         ]}
@@ -385,7 +492,7 @@ const Homepage = ({ navigation, ...props }) => {
                   <View style={styles.featureIconContainer}>
                     <AntDesign
                       name={
-                        isPressedOnSpecificIssues
+                        isPressedOnReadingMaterials
                           ? 'downcircle'
                           : 'rightcircleo'
                       }
@@ -394,13 +501,13 @@ const Homepage = ({ navigation, ...props }) => {
                     />
                   </View>
                 </View>
-                {isPressedOnSpecificIssues && (
+                {isPressedOnReadingMaterials && (
                   <View style={{ paddingTop: 10, paddingLeft: 0 }}>
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
-                        navigation.navigate('SpecificIssues', {
-                          data: SpecialIssuesData.find(
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
                             (issue) => issue.name === 'Relationship',
                           ),
                           goBack: screenName,
@@ -417,8 +524,17 @@ const Homepage = ({ navigation, ...props }) => {
                         প্রিয়জনের সাথে সম্পর্কের উন্নয়ন
                       </Text>
                     </TouchableOpacity>
+                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'Study skill',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
                     >
                       <AntDesign
                         name="arrowright"
@@ -430,8 +546,18 @@ const Homepage = ({ navigation, ...props }) => {
                         পড়াশোনা সম্পর্কিত দক্ষতা
                       </Text>
                     </TouchableOpacity>
+                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) =>
+                              issue.name === 'Anger Management',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
                     >
                       <AntDesign
                         name="arrowright"
@@ -443,21 +569,17 @@ const Homepage = ({ navigation, ...props }) => {
                         রাগ ব্যবস্থাপনা
                       </Text>
                     </TouchableOpacity>
+                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
-                    >
-                      <AntDesign
-                        name="arrowright"
-                        size={14}
-                        color="black"
-                        style={{ paddingTop: 4 }}
-                      />
-                      <Text style={styles.subsectionContainerText}>
-                        চাপ নিরসন
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) => issue.name === 'Sleep Hygine',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
                     >
                       <AntDesign
                         name="arrowright"
@@ -469,8 +591,18 @@ const Homepage = ({ navigation, ...props }) => {
                         ঘুম
                       </Text>
                     </TouchableOpacity>
+                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) =>
+                              issue.name === 'Suicidal Tendency',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
                     >
                       <AntDesign
                         name="arrowright"
@@ -487,7 +619,12 @@ const Homepage = ({ navigation, ...props }) => {
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+            onPress={() =>
+              navigation.navigate('CopyingCards', {
+                goBack: screenName,
+              })
+            }>
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
                   <View
@@ -560,6 +697,7 @@ const Homepage = ({ navigation, ...props }) => {
             textStyle={{ fontSize: 18 }}
           />
         </View>
+        <Toast />
       </ScrollView>
     </View>
   );
@@ -629,23 +767,17 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     padding: 10,
 
-    borderColor: '#3c7a53',
+    borderColor: '#a0d1b2',
     borderRadius: 5,
-    borderWidth: 0,
+    borderWidth: 1,
 
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 1,
+    shadowColor: 'black',
+    backgroundColor: 'white',
   },
   eachFeatureContainerPress: {
     borderColor: '#52a872',
     borderWidth: 2,
-    backgroundColor: '#eee',
+    backgroundColor: 'white',
   },
   featureIconContainer: {
     alignSelf: 'center',
@@ -683,13 +815,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginBottom: 5,
+    paddingVertical: 11,
 
     borderRadius: 5,
     borderWidth: 0,
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 2,
-    shadowOffset: 20,
+    elevation: 0.1,
   },
   subsectionContainerText: {
     paddingLeft: 5,

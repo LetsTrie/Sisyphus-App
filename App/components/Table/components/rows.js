@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { View, ViewPropTypes, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Cell } from './cell';
 
 const sum = (arr) => arr.reduce((acc, n) => acc + n, 0);
 
 export class Row extends Component {
-  static propTypes = {
-    style: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
-  };
-
   render() {
     const {
       data,
@@ -24,7 +19,12 @@ export class Row extends Component {
 
     return data ? (
       <View
-        style={[height && { height }, width && { width }, styles.row, style]}
+        style={[
+          height && { height },
+          width && { width },
+          styles.row,
+          style,
+        ]}
       >
         {data.map((item, i) => {
           const flex = flexArr && flexArr[i];
@@ -47,11 +47,6 @@ export class Row extends Component {
 }
 
 export class Rows extends Component {
-  static propTypes = {
-    style: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
-  };
-
   render() {
     const {
       data,

@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, ViewPropTypes, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Cell } from './cell';
 
 const sum = (arr) => arr.reduce((acc, n) => acc + n, 0);
 
 export class Col extends Component {
-  static propTypes = {
-    width: PropTypes.number,
-    style: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
-  };
-
   render() {
     const {
       data,
@@ -50,11 +44,6 @@ export class Col extends Component {
 }
 
 export class Cols extends Component {
-  static propTypes = {
-    style: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
-  };
-
   render() {
     const {
       data,

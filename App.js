@@ -4,20 +4,17 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HeaderBackButton } from '@react-navigation/elements';
-
 import { store, persistor } from './App/redux/store';
-
 import { ScreenContainer } from './App/components/screenContainer';
 import LoginSignupComponent from './App/screens/onboarding/loginSignup';
 import DemographicInformation from './App/screens/onboarding/demographicInformation';
 import Homepage from './App/screens/homepage';
-import { SpecificIssues } from './App/screens/specificIssues';
+import { ReadingMaterials } from './App/screens/readingMaterials';
 import AssessmentResultHistory from './App/screens/assessments/AssessmentResultHistory';
-
 import AssessmentList from './App/screens/assessments/AssessmentList.js';
 import Scale from './App/screens/assessments/Scale';
 import Result from './App/screens/assessments/Result';
-
+import CopyingCards from './App/screens/copyingCards/CopingCards';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -56,11 +53,10 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="LoginSignup"
+              initialRouteName="Homepage"
               screenOptions={{
                 headerStyle: {
                   backgroundColor: '#479162',
-                  height: 60,
                 },
                 headerTitleStyle: {
                   color: 'white',
@@ -72,10 +68,29 @@ export default function App() {
               }}
             >
               <Stack.Screen
+                name="CopyingCards"
+                component={CopyingCards}
+                options={({ navigation, route }) => ({
+                  title:
+                    route?.params?.headerTitle ?? 'অনুশীলন কার্ড',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate('Homepage');
+                      }}
+                    />
+                  ),
+                })}
+              />
+              
+              <Stack.Screen
                 name="LoginSignup"
                 component={LoginSignupComponent}
                 options={{ headerShown: false }}
               />
+
               <Stack.Screen
                 name="DemographicInformation"
                 component={DemographicInformation}
@@ -109,13 +124,22 @@ export default function App() {
               />
 
               <Stack.Screen
-                name="SpecificIssues"
-                component={SpecificIssues}
-                options={({ navigation }) => ({
-                  headerShown: false,
+                name="ReadingMaterials"
+                component={ReadingMaterials}
+                options={({ navigation, route }) => ({
+                  title:
+                    route?.params?.data?.banglaName ??
+                    'নিজেকে মূল্যায়ন করুন',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => navigation.navigate('Homepage')}
+                    />
+                  ),
                 })}
               />
-              {/* ExploreScale */}
+
               <Stack.Screen
                 name="ExploreScale"
                 component={Scale}
@@ -132,7 +156,7 @@ export default function App() {
                   ),
                 })}
               />
-              {/* Result */}
+
               <Stack.Screen
                 name="ScaleResult"
                 component={Result}

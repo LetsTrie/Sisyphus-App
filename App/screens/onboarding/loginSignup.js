@@ -27,17 +27,14 @@ import { AppButton } from '../../components/button';
 
 WebBrowser.maybeCompleteAuthSession();
 
-// TODO: Name, ProfileImage info - get from API
 const LoginSignupComponent = ({ navigation, route, ...props }) => {
   const { loginAction, logoutAction } = props;
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId: expoWebClientId,
     // iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
     androidClientId: googleAndroidClientId,
-    // webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
     scopes: ['openid', 'profile', 'email'],
   });
 
@@ -59,7 +56,7 @@ const LoginSignupComponent = ({ navigation, route, ...props }) => {
             loginAction,
           );
         } catch (error) {
-          errorLog(`Getting data from google profile - ${error}`);
+          errorLog(`Getting data from google profile: ${JSON.stringify(error.response.data)}`);
         } finally {
           setIsLoading(false);
         }

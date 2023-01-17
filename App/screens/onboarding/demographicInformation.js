@@ -274,7 +274,7 @@ const DemographicInformation = ({ navigation, route, ...props }) => {
       };
       setIsLoading(true);
       await axios.post(
-        `${baseUrl}/accounts/add-demographic-info`,
+        `${baseUrl}/account/add-demographic-info`,
         formFields,
         { headers },
       );

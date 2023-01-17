@@ -6,7 +6,7 @@ const getUserInformations = async (accessToken) => {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${accessToken}`,
   };
-  const { data } = await axios.get(`${baseUrl}/accounts/profile`, {
+  const { data } = await axios.get(`${baseUrl}/account/user-profile`, {
     headers,
   });
 

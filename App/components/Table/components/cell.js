@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { View, ViewPropTypes, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export class Cell extends Component {
-  static propTypes = {
-    style: ViewPropTypes.style,
-    textStyle: Text.propTypes.style,
-    borderStyle: ViewPropTypes.style,
-  };
-
   render() {
     const {
       data,
@@ -26,9 +20,11 @@ export class Cell extends Component {
         {data}
       </Text>
     );
-    const borderTopWidth = (borderStyle && borderStyle.borderWidth) || 0;
+    const borderTopWidth =
+      (borderStyle && borderStyle.borderWidth) || 0;
     const borderRightWidth = borderTopWidth;
-    const borderColor = (borderStyle && borderStyle.borderColor) || '#000';
+    const borderColor =
+      (borderStyle && borderStyle.borderColor) || '#000';
 
     return (
       <View

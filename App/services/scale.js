@@ -6,7 +6,7 @@ const submitScale = async (payload, accessToken) => {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${accessToken}`,
   };
-  const { data } = await axios.post(`${baseUrl}/scales`, payload, {
+  const { data } = await axios.post(`${baseUrl}/scale`, payload, {
     headers,
   });
 };
@@ -17,7 +17,7 @@ const latestScaleUpdate = async (accessToken) => {
     Authorization: `Bearer ${accessToken}`,
   };
   const { data } = await axios.get(
-    `${baseUrl}/scales/latest-result`,
+    `${baseUrl}/scale/latest-result`,
     { headers },
   );
 

@@ -13,6 +13,8 @@ import { getLatestProgress } from '../../redux/actions/scaleActions';
 import { ScaleDescriptionPage } from './ScaleDescriptionPage';
 import { engToBanNumConversion } from '../../helpers/utils';
 
+import Constants from 'expo-constants';
+
 const AssessmentList = ({ navigation, route, ...props }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedScale, setSelectedScale] = useState({});
@@ -113,7 +115,7 @@ const AssessmentList = ({ navigation, route, ...props }) => {
             <View
               style={[
                 styles.modalView,
-                { marginTop: headerHeight + 10 },
+                { marginTop: Constants.statusBarHeight },
               ]}
             >
               <ScaleDescriptionPage

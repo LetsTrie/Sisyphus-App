@@ -35,6 +35,7 @@ const Box = ({
   lastDate,
   onPress,
   boxStyle = {},
+  boxTitleStyle = {}
 }) => {
   return (
     <TouchableWithoutFeedback
@@ -42,17 +43,7 @@ const Box = ({
       style={{ backgroundColor: 'white' }}
     >
       <View style={[styles.box, boxStyle]}>
-        {/* <ImageBackground
-          source={source}
-          style={styles.backgroundImageStyle}
-        > */}
-        {/* <LinearGradient
-            colors={['#75757598', '#2b2b2b98']}
-            start={[1, 1]}
-            end={[0, 0]}
-            style={styles.linearGradientStyle}
-          ></LinearGradient> */}
-        <Text style={styles.testName}>{name}</Text>
+        <Text style={[styles.testName, boxTitleStyle]}>{name}</Text>
         {lastDate && (
           <View style={styles.history}>
             <Text style={styles.lastScore}>
@@ -76,7 +67,6 @@ const Box = ({
             </Text>
           </View>
         )}
-        {/* </ImageBackground> */}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -85,7 +75,7 @@ const Box = ({
 const styles = StyleSheet.create({
   box: {
     width: '92%',
-    minHeight: 65,
+    minHeight: 70,
     margin: 10,
     marginLeft: 14,
     marginBottom: 3,

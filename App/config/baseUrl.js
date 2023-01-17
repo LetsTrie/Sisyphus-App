@@ -1,1 +1,1 @@
-export default 'https://sisyphusapp.herokuapp.com/api/v1';
+export default 'https://sakib-server.herokuapp.com/sisyphus/api/v1';
