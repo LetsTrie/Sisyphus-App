@@ -1,0 +1,6 @@
+Build APK:
+  eas build -p android --profile sisyphusapp
+
+Checking App:
+  expo doctor
+  expo doctor --fix-dependencies
