@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import colors from '../config/colors';
+import Icon from '@expo/vector-icons/Ionicons';
 
 function AppButton({
   title,
@@ -9,6 +10,7 @@ function AppButton({
   textStyle,
   color = 'primary',
   disabled = false,
+  showIcon = false,
 }) {
   return (
     <TouchableOpacity
@@ -20,6 +22,14 @@ function AppButton({
       onPress={onPress}
       disabled={disabled}
     >
+      {showIcon && (
+        <Icon
+          name="trash"
+          size={19}
+          color="white"
+          style={{ paddingRight: 4 }}
+        />
+      )}
       <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );

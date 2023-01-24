@@ -63,8 +63,10 @@ const Homepage = ({ navigation, ...props }) => {
     },
   ];
 
-  const [isPressedOnReadingMaterials, setIsPressedOnReadingMaterials] =
-    useState(false);
+  const [
+    isPressedOnReadingMaterials,
+    setIsPressedOnReadingMaterials,
+  ] = useState(false);
 
   const [isPressedOnPsychoeducation, setIsPressedOnPsychoEducation] =
     useState(false);
@@ -140,6 +142,7 @@ const Homepage = ({ navigation, ...props }) => {
               fontSize: 35,
               padding: 10,
               paddingBottom: 6,
+              paddingTop: 30,
               color: '#fffef4',
               fontFamily: 'playfair-bold',
               textAlign: 'center',
@@ -349,13 +352,13 @@ const Homepage = ({ navigation, ...props }) => {
                 </View>
                 {isPressedOnPsychoeducation && (
                   <View style={{ paddingTop: 10, paddingLeft: 0 }}>
-                    
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
                         navigation.navigate('ReadingMaterials', {
                           data: readingMaterials.find(
-                            (issue) => issue.name === 'Myths and facts',
+                            (issue) =>
+                              issue.name === 'Myths and facts',
                           ),
                           goBack: screenName,
                         })
@@ -371,13 +374,14 @@ const Homepage = ({ navigation, ...props }) => {
                         মিথ এবং বাস্তবতা
                       </Text>
                     </TouchableOpacity>
-                     
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
                         navigation.navigate('ReadingMaterials', {
                           data: readingMaterials.find(
-                            (issue) => issue.name === 'What is mental health',
+                            (issue) =>
+                              issue.name === 'What is mental health',
                           ),
                           goBack: screenName,
                         })
@@ -393,13 +397,14 @@ const Homepage = ({ navigation, ...props }) => {
                         মানসিক স্বাস্থ্য বলতে আমরা কি বুঝি?
                       </Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
                         navigation.navigate('ReadingMaterials', {
                           data: readingMaterials.find(
-                            (issue) => issue.name === 'What is psychotherapy',
+                            (issue) =>
+                              issue.name === 'What is psychotherapy',
                           ),
                           goBack: screenName,
                         })
@@ -412,7 +417,7 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        সাইকো থেরাপি কি? 
+                        সাইকোথেরাপি কি?
                       </Text>
                     </TouchableOpacity>
 
@@ -421,7 +426,9 @@ const Homepage = ({ navigation, ...props }) => {
                       onPress={() =>
                         navigation.navigate('ReadingMaterials', {
                           data: readingMaterials.find(
-                            (issue) => issue.name === 'Mental Health Counselling',
+                            (issue) =>
+                              issue.name ===
+                              'Mental Health Counselling',
                           ),
                           goBack: screenName,
                         })
@@ -437,7 +444,6 @@ const Homepage = ({ navigation, ...props }) => {
                         মানসিক স্বাস্থ্য কাউন্সেলিং
                       </Text>
                     </TouchableOpacity>
-
                   </View>
                 )}
               </View>
@@ -524,7 +530,7 @@ const Homepage = ({ navigation, ...props }) => {
                         প্রিয়জনের সাথে সম্পর্কের উন্নয়ন
                       </Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
@@ -546,7 +552,7 @@ const Homepage = ({ navigation, ...props }) => {
                         পড়াশোনা সম্পর্কিত দক্ষতা
                       </Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
@@ -569,7 +575,7 @@ const Homepage = ({ navigation, ...props }) => {
                         রাগ ব্যবস্থাপনা
                       </Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
@@ -591,7 +597,7 @@ const Homepage = ({ navigation, ...props }) => {
                         ঘুম
                       </Text>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
@@ -620,11 +626,12 @@ const Homepage = ({ navigation, ...props }) => {
             </TouchableWithoutFeedback>
 
             <TouchableWithoutFeedback
-            onPress={() =>
-              navigation.navigate('CopyingCards', {
-                goBack: screenName,
-              })
-            }>
+              onPress={() =>
+                navigation.navigate('CopyingCards', {
+                  goBack: screenName,
+                })
+              }
+            >
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
                   <View

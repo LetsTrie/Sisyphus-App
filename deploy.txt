@@ -4,3 +4,11 @@ Build APK:
 Checking App:
   expo doctor
   expo doctor --fix-dependencies
+
+Error: 
+  ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types
+    - https://stackoverflow.com/a/73166444/19758192
+    - yarn patch-package react-native
+
+  Clear bundler cache
+    - npx expo start -c
