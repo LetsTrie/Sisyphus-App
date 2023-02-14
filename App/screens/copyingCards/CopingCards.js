@@ -23,6 +23,7 @@ import NewCardModal from './NewCardModal';
 import { getCardList, deleteCard } from '../../services/card';
 import { errorLog } from '../../helpers/log';
 import { AppButton } from '../../components/button';
+import readingMaterials from '../readingMaterials/data';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -245,7 +246,6 @@ const CopyingCards = ({ navigation, route, ...props }) => {
         );
         if (idx !== -1) {
           const len = currentCards[idx].cards.length;
-          console.log({ ok: currentCards[idx] });
           currentCards[idx].cards.splice(len - 1, 0, {
             createdByUser: true,
             text: card.text,

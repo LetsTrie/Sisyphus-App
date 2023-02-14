@@ -71,6 +71,11 @@ const Homepage = ({ navigation, ...props }) => {
   const [isPressedOnPsychoeducation, setIsPressedOnPsychoEducation] =
     useState(false);
 
+  const [
+    isPressedOnSonkhiptoKoushol,
+    setIsPressedOnSonkhiptoKoushol,
+  ] = useState(false);
+
   const logoutFromApp = async () => {
     await logoutAction();
     navigation.navigate('LoginSignup');
@@ -105,6 +110,11 @@ const Homepage = ({ navigation, ...props }) => {
       ToastAndroid.SHORT,
       ToastAndroid.CENTER,
     );
+    if (emoji.label === 'Awful') {
+      navigation.navigate('TatkhonikUposhom', {
+        goBack: screenName,
+      });
+    }
   };
 
   useEffect(() => {
@@ -627,12 +637,17 @@ const Homepage = ({ navigation, ...props }) => {
 
             <TouchableWithoutFeedback
               onPress={() =>
-                navigation.navigate('CopyingCards', {
-                  goBack: screenName,
-                })
+                setIsPressedOnSonkhiptoKoushol((prev) => !prev)
               }
             >
-              <View style={styles.eachFeatureContainer}>
+              <View
+                style={[
+                  styles.eachFeatureContainer,
+                  !isPressedOnSonkhiptoKoushol
+                    ? {}
+                    : styles.eachFeatureContainerPress,
+                ]}
+              >
                 <View style={styles.eachFeatureMainContainer}>
                   <View
                     style={{ display: 'flex', flexDirection: 'row' }}
@@ -644,26 +659,119 @@ const Homepage = ({ navigation, ...props }) => {
                       ></ImageBackground>
                     </View>
                     <View>
-                      <Text style={styles.featureHeading}>
+                      <Text
+                        style={[
+                          styles.featureHeading,
+                          !isPressedOnSonkhiptoKoushol
+                            ? {}
+                            : styles.featureHeadingPressed,
+                        ]}
+                      >
                         সংক্ষিপ্ত কিছু কৌশল
                       </Text>
-                      <Text style={styles.featureSubheading}>
-                        Fast and Easy Exercise
+                      <Text
+                        style={[
+                          styles.featureSubheading,
+                          isPressedOnSonkhiptoKoushol
+                            ? { color: '#666' }
+                            : {},
+                        ]}
+                      >
+                        Some Brief Techniques
                       </Text>
                     </View>
                   </View>
                   <View style={styles.featureIconContainer}>
                     <AntDesign
-                      name="rightcircleo"
+                      name={
+                        isPressedOnSonkhiptoKoushol
+                          ? 'downcircle'
+                          : 'rightcircleo'
+                      }
                       size={24}
-                      color="#42855B"
+                      color="#3c7a53"
                     />
                   </View>
                 </View>
+                {isPressedOnSonkhiptoKoushol && (
+                  <View style={{ paddingTop: 10, paddingLeft: 0 }}>
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('CopyingCards', {
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        অনুশীলন কার্ডস
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) =>
+                              issue.name ===
+                              'Focusing on good moments',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        ভালোলাগার মুহূর্ত গুলোয় মন দেয়া
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('ReadingMaterials', {
+                          data: readingMaterials.find(
+                            (issue) =>
+                              issue.name === 'Learn to love yourself',
+                          ),
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        নিজেকে ভালবাসতে জানা
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
               </View>
             </TouchableWithoutFeedback>
 
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() =>
+                navigation.navigate('TatkhonikUposhom', {
+                  goBack: screenName,
+                })
+              }
+            >
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
                   <View

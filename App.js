@@ -17,6 +17,7 @@ import Result from './App/screens/assessments/Result';
 import CopyingCards from './App/screens/copyingCards/CopingCards';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import MusicPlayerList from './App/screens/musicPlayers/MusicPlayerList';
 
 const Stack = createNativeStackNavigator();
 
@@ -84,7 +85,7 @@ export default function App() {
                   ),
                 })}
               />
-              
+
               <Stack.Screen
                 name="LoginSignup"
                 component={LoginSignupComponent}
@@ -155,6 +156,11 @@ export default function App() {
                     />
                   ),
                 })}
+              />
+
+              <Stack.Screen
+                name="TatkhonikUposhom"
+                component={MusicPlayerList}
               />
 
               <Stack.Screen
