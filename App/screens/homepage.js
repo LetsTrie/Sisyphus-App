@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   BackHandler,
   ToastAndroid,
+  Modal,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import readingMaterials from './readingMaterials/data';
@@ -18,11 +19,22 @@ import { connect } from 'react-redux';
 import { getUserInformations } from '../services/user';
 import { errorLog } from '../helpers/log';
 import Toast from 'react-native-toast-message';
+import Constants from 'expo-constants';
+import { ScaleDescriptionPage } from './assessments/ScaleDescriptionPage';
+import { ModalWithTitleDescription } from '../components/ModalWithTitleDescription';
 
 const screenName = 'Homepage';
 
 const Homepage = ({ navigation, ...props }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const [username, setUsername] = useState('');
+
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalDescription, setModalDescription] = useState('');
+  const [modalNavigateTo, setModalNavigateTo] = useState('');
+  const [modalButtonText, setModalButtonText] = useState('');
+  const [modalIcon, setModalIcon] = useState(null);
+
   const { logoutAction } = props;
   const emoji = [
     {
@@ -76,6 +88,10 @@ const Homepage = ({ navigation, ...props }) => {
     setIsPressedOnSonkhiptoKoushol,
   ] = useState(false);
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const logoutFromApp = async () => {
     await logoutAction();
     navigation.navigate('LoginSignup');
@@ -105,15 +121,53 @@ const Homepage = ({ navigation, ...props }) => {
   }
 
   const handleEmojiPress = (emoji) => {
-    ToastAndroid.showWithGravity(
-      emoji.toasterMessage,
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
     if (emoji.label === 'Awful') {
-      navigation.navigate('TatkhonikUposhom', {
-        goBack: screenName,
-      });
+      setModalVisible(true);
+      setModalTitle('');
+      setModalDescription(
+        `জেনে খারাপ লাগছে যে আপনি আজ একদম ভালো নেই!`,
+      );
+      setModalButtonText('তাৎক্ষণিক উপশম');
+      setModalNavigateTo('TatkhonikUposhom');
+      setModalIcon(require('../assests/images/CryingIcon.jpeg'));
+    } else {
+      ToastAndroid.showWithGravity(
+        emoji.toasterMessage,
+        ToastAndroid.LONG,
+        ToastAndroid.CENTER,
+      );
+    }
+  };
+
+  const showModal = (sectionName) => {
+    setModalIcon(null);
+    if (sectionName === 'quickrelief') {
+      setModalVisible(true);
+      setModalTitle('তাৎক্ষনিক উপশম');
+      setModalDescription(`তাৎক্ষণিক উপশমের কৌশলগুলো আপনি এই মুহূর্তেই নিজেকে একটু সুস্থির ও নিজের অনুভূতি বা চিন্তার উপর নিয়ন্ত্রণ নিয়ে আসার জন্য ব্যবহার করতে পারেন। মনে রাখবেন এই কৌশলগুলো আপনাকে একটি সাময়িক উপশম দিতে সক্ষম, তবে এটা কোন স্থায়ী সমাধান না। আপাতত একটু স্থির হয়ে আপনি ধীরে এই এপসে দেয়া অন্যান্য কৌশলগুলো নিয়ে কাজ করুন। তবে তাৎক্ষণিক উপশমের কৌশলগুলো, যেটা/যেগুলো ব্যবহার করে আপনি কিছুটা ভাল বা স্থির বোধ করবেন, সেগুলো খুব নিয়মিত ব্যাবহার করে গেলে আপনার সার্বিক মানসিক অবস্থার উপর অপেক্ষাকৃত স্থায়ী ইতিবাচক প্রভাব কাজ করবে।
+ 
+খুব তীব্র কোন অনুভূতি (রাগ, বিরক্ত, হতাশা, অস্থিরতা, দুশ্চিন্তা ইত্যাদি) আপনাকে পেয়ে বসলে, তাৎক্ষণিক উপশমের জন্য যে কোন রিলাক্সেশন; ইমাজিনারি, ব্রিদিং বা মাসকিউলার (পেশী) রিলাক্সেশন প্র্যাকটিস করতে পারেন। তবে আপনি যদি খুব বিষণ্ণ বা দুঃখভারাক্রান্ত বোধ করেন, সেই ক্ষেত্রে রিলাক্সেশন না করে আপনি বরং মাইন্ডফুলনেস প্র্যাকটিস করুন।
+ 
+মনে রাখা জরুরী, কোন কৌশল ব্যাবহার করতে গিয়ে যদি আপনার মনে হয়, এটা আপনাকে আরও খারাপ অনুভূতি দিচ্ছে, তাহলে জোর করে প্র্যাকটিস না করে আপনি কিছুক্ষণ প্র্যাকটিস বন্ধ রাখুন। রিলাক্সেশন খুব নিরাপদ এবং সাধারণত কারো অসুবিধা হয় না। তবে, বিষণ্ণ থাকলে রিলাক্সেশন আপনার শারীরিক/মানসিক জড়তা বাড়িয়ে দিতে পারে, তাই মাইন্ডফুলনেস প্র্যাকটিস করা শ্রেয়। তবে, মাইন্ডফুলনেস প্র্যাকটিসের ক্ষেত্রে কারো কারো অভ্যন্তরীণ গভীর খত খুব বেশি সক্রিয় হয়ে যেতে পারে, সেই ক্ষেত্রে আপনি বিরতি নিয়ে প্র্যাকটিস করুন অথবা চোখ খুলে প্র্যাকটিসটি চালিয়ে দেখতে পারেন।
+ 
+কোন কৌশল ব্যবহারে নিজেকে অত্যধিক চাপ দেবার দরকার নাই, আবার যেমন নিজেকে অত্যধিক ছাড় দেবারও দরকার নাই। তীব্র নেতিবাচক অনুভূতি আচ্ছন্ন মন নিয়ে এই কৌশলগুলো প্রয়োগ করা কঠিন মনে হতে পারে, মন বারবার নানান চিন্তায় অন্য দিকে চলে যাবে, একটু ধৈর্য নিয়ে প্র্যাকটিস চালিয়ে যান, ধীরে ধীরে মনে স্থিরতা ফিরে আসবে।
+ 
+ফিজিক্যাল এক্সারসাইজ বা ব্যায়াম কেবল শরীর নয়, মনের ফিটনেসেও খুবই ইতিবাচক ভূমিকা রাখে। তাৎক্ষণিক উপশম হিসেবেও আপনি ২০-৩০ মিনিট যে কোন ব্যায়াম করে নিজেকে সুস্থির করতে পারেন, নিরাপদ কোন রাস্তা বা মাঠে দ্রুত হাঁটাও একটি ভাল ব্যায়াম। এই ক্ষেত্রে মনোযোগটাকে বারবার বাইরের দিকে বা আশেপাশের শব্দ বা দৃশ্যে বা শরীরে পেশিতে বা স্বাসের দিকে রাখার চেষ্টা করবেন যাতে আপনার মন কোন চিন্তা বা বিচার বিশ্লেষণে খুব বেশি ডুবে যেতে না পারে।`);
+
+      setModalNavigateTo('TatkhonikUposhom');
+    }
+
+    if (sectionName === 'CopyingCards') {
+      setModalVisible(true);
+      setModalTitle('অনুশীলন কার্ডস');
+      setModalDescription(`কোপিং কার্ড সংকটপূর্ণ মুহূর্তগুলো সামাল দেবার জন্য খুব সহজ এবং খুব কার্যকরী একটা পদ্ধতি যেখানে একদম নিজস্ব কোপিং স্টেটমেন্টগুলো লিখা থাকে।
+
+আপনি কাগজে আপনার কোপিং স্টেটমেন্টগুলো লিখে রাখুন। যেসব অবস্থা বা পরিস্থিতি সামাল দেয়া আপনার জন্য কঠিন হয়ে ওঠে, সেখানে আপনি কী কী করলে বা নিজেকে কী বললে অথবা কী মনে করিয়ে দিলে আপনার জন্য কাজে লাগবে, সেগুলো আগেই আপনি আপনার কার্ডে বা কাগজে লিখে ফেলুন। লিখার সময় একটু সময় নিয়ে চিন্তাভাবনা করে লিখুন, সেগুলো যেন আপনার জন্য কার্যকরী হয়। এই স্টেটমেন্টগুলো যথাসম্ভব ছোট ও সরল রাখার চেষ্টা করুন, যাতে সহজেই আপনি নিজেকে মনে করিয়ে দিতে পারেন। এবং কার্ডটা নিজের সাথে রাখুন এবং মাঝে মাঝে কার্ডটা দেখুন যাতে যথাসময়ে এটা মনে করতে আপনাকে বেগ পেতে না হয়।
+
+স্পষ্ট ধারণার জন্য এখানে অনেকগুলো উদাহরণ দেয়া আছে।`);
+
+      setModalNavigateTo('CopyingCards');
+      setModalButtonText('অনুশীলন কার্ডস দেখুন');
     }
   };
 
@@ -287,7 +341,7 @@ const Homepage = ({ navigation, ...props }) => {
                         মানসিক অবস্থা যাচাই
                       </Text>
                       <Text style={styles.featureSubheading}>
-                        সেলফ এসেসমেন্ট
+                        Self Assessment
                       </Text>
                     </View>
                   </View>
@@ -344,7 +398,7 @@ const Homepage = ({ navigation, ...props }) => {
                             : {},
                         ]}
                       >
-                        সাইকো-এডুকেশন
+                        Psycho Education
                       </Text>
                     </View>
                   </View>
@@ -501,7 +555,7 @@ const Homepage = ({ navigation, ...props }) => {
                             : {},
                         ]}
                       >
-                        নির্দিষ্ট কিছু বিষয়
+                        Specific Issues
                       </Text>
                     </View>
                   </View>
@@ -697,11 +751,7 @@ const Homepage = ({ navigation, ...props }) => {
                   <View style={{ paddingTop: 10, paddingLeft: 0 }}>
                     <TouchableOpacity
                       style={styles.subsectionContainer}
-                      onPress={() =>
-                        navigation.navigate('CopyingCards', {
-                          goBack: screenName,
-                        })
-                      }
+                      onPress={() => showModal('CopyingCards')}
                     >
                       <AntDesign
                         name="arrowright"
@@ -766,11 +816,7 @@ const Homepage = ({ navigation, ...props }) => {
             </TouchableWithoutFeedback>
 
             <TouchableWithoutFeedback
-              onPress={() =>
-                navigation.navigate('TatkhonikUposhom', {
-                  goBack: screenName,
-                })
-              }
+              onPress={() => showModal('quickrelief')}
             >
               <View style={styles.eachFeatureContainer}>
                 <View style={styles.eachFeatureMainContainer}>
@@ -813,6 +859,37 @@ const Homepage = ({ navigation, ...props }) => {
           />
         </View>
         <Toast />
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={closeModal}
+        >
+          <View style={styles.centeredView}>
+            <View
+              style={[
+                styles.modalView,
+                { marginTop: Constants.statusBarHeight },
+              ]}
+            >
+              <ModalWithTitleDescription
+                title={modalTitle}
+                description={modalDescription}
+                buttonText={
+                  modalButtonText !== ''
+                    ? modalButtonText
+                    : 'পরবর্তী পেইজে যান'
+                }
+                closeModal={closeModal}
+                navigateTo={modalNavigateTo}
+                goBack={screenName}
+                modalButtonText={modalButtonText}
+                icon={modalIcon}
+              />
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </View>
   );
@@ -888,18 +965,20 @@ const styles = StyleSheet.create({
 
     shadowColor: 'black',
     backgroundColor: 'white',
+
+    borderLeftWidth: 6,
   },
   eachFeatureContainerPress: {
     borderColor: '#52a872',
     borderWidth: 2,
     backgroundColor: 'white',
+    borderLeftWidth: 2,
   },
   featureIconContainer: {
     alignSelf: 'center',
     paddingRight: 7,
   },
   featureLeftImage: {
-    backgroundColor: 'red',
     height: 47,
     width: 47,
     marginRight: 8,
@@ -909,7 +988,7 @@ const styles = StyleSheet.create({
     fontSize: 15.5,
     marginBottom: 2,
     paddingLeft: 4,
-    paddingTop: 1,
+    paddingTop: 2.5,
     fontFamily: 'Roboto',
   },
   featureHeadingPressed: {
@@ -940,6 +1019,30 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     fontSize: 15,
     color: '#333',
+  },
+
+  centeredView: {
+    flex: 1,
+    marginBottom: 0,
+    height: '100%',
+  },
+  modalView: {
+    margin: 10,
+    paddingBottom: 0,
+    backgroundColor: 'white',
+    borderRadius: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 10,
+  },
+  scrollViewStyle: {
+    height: '100%',
   },
 });
 

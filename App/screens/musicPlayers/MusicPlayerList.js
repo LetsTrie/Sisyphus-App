@@ -15,16 +15,6 @@ import { Audio } from 'expo-av';
 
 const sectionsAllCards = [
   {
-    id: 'audio-01',
-    name: 'Body scan: Generic under mindfulness',
-    link: 'Bodyscan.m4a',
-  },
-  {
-    id: 'audio-02',
-    name: 'Sitting with breath (generic, mindfulness)',
-    link: 'Sittingwithbreath.m4a',
-  },
-  {
     id: 'audio-03',
     name: 'Imaginary relaxation (quick intervention)',
     link: '5minImaginaryRelaxation.m4a',
@@ -33,6 +23,16 @@ const sectionsAllCards = [
     id: 'audio-04',
     name: 'Quick intervention: 3 Minutes Breathing Space (mindfulness)',
     link: 'QuickIntervention.m4a',
+  },
+  {
+    id: 'audio-01',
+    name: 'Body scan: Generic under mindfulness',
+    link: 'Bodyscan.m4a',
+  },
+  {
+    id: 'audio-02',
+    name: 'Sitting with breath (generic, mindfulness)',
+    link: 'Sittingwithbreath.m4a',
   },
 ];
 
@@ -185,19 +185,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 1,
-    borderColor: '#eee',
+    borderColor: '#a0d1b2',
     elevation: 4,
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: 'white',
+
+    borderLeftWidth: 6,
   },
   audioText: {
-    marginLeft: 12,
+    marginLeft: 10,
     alignSelf: 'center',
     fontSize: 16,
     fontWeight: 'bold',
-    lineHeight: 25,
-    width: '70%',
+    lineHeight: 24,
+    width: '72%',
     color: '#333',
   },
 });

@@ -35,7 +35,7 @@ const Box = ({
   lastDate,
   onPress,
   boxStyle = {},
-  boxTitleStyle = {}
+  boxTitleStyle = {},
 }) => {
   return (
     <TouchableWithoutFeedback
@@ -84,6 +84,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: 'white',
+
+    borderColor: '#a0d1b2',
+    borderWidth: 1,
+    borderLeftWidth: 6,
+    paddingLeft: 9,
   },
   backgroundImageStyle: {
     // height: 250,
