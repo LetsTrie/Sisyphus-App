@@ -1,0 +1,6 @@
+- icon
+- cover_image
+- intro of sisyphusapp
+- In the first page of the app, show "sisyphus title"
+- optimize images
+- remove assets from app and get them from cloud

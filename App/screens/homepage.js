@@ -35,6 +35,11 @@ const Homepage = ({ navigation, ...props }) => {
   const [modalButtonText, setModalButtonText] = useState('');
   const [modalIcon, setModalIcon] = useState(null);
 
+  const [
+    modalReturnToHomepageExists,
+    setModalReturnToHomepageExists,
+  ] = useState(false);
+
   const { logoutAction } = props;
   const emoji = [
     {
@@ -125,8 +130,9 @@ const Homepage = ({ navigation, ...props }) => {
       setModalVisible(true);
       setModalTitle('');
       setModalDescription(
-        `জেনে খারাপ লাগছে যে আপনি আজ একদম ভালো নেই!`,
+        `জেনে খারাপ লাগছে যে আপনি আজ একদম ভালো নেই! আপনি তাৎক্ষনিক উপশমের জন্য অ্যাপের উল্লিখিত কৌশলগুলো অনুশীলন করতে পারেন`,
       );
+      setModalReturnToHomepageExists(true);
       setModalButtonText('তাৎক্ষণিক উপশম');
       setModalNavigateTo('TatkhonikUposhom');
       setModalIcon(require('../assests/images/CryingIcon.jpeg'));
@@ -141,6 +147,7 @@ const Homepage = ({ navigation, ...props }) => {
 
   const showModal = (sectionName) => {
     setModalIcon(null);
+    setModalReturnToHomepageExists(false);
     if (sectionName === 'quickrelief') {
       setModalVisible(true);
       setModalTitle('তাৎক্ষনিক উপশম');
@@ -767,6 +774,26 @@ const Homepage = ({ navigation, ...props }) => {
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
+                        navigation.navigate('YtScreen', {
+                          goBack: 'Homepage',
+                          title: 'স্টাডি স্কিলস',
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        স্টাডি স্কিলস
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
                         navigation.navigate('ReadingMaterials', {
                           data: readingMaterials.find(
                             (issue) =>
@@ -834,7 +861,45 @@ const Homepage = ({ navigation, ...props }) => {
                         তাৎক্ষনিক উপশম
                       </Text>
                       <Text style={styles.featureSubheading}>
-                        Fast and Easy Exercise
+                        Quick Relief
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.featureIconContainer}>
+                    <AntDesign
+                      name="rightcircleo"
+                      size={24}
+                      color="#42855B"
+                    />
+                  </View>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+
+            <TouchableWithoutFeedback
+              onPress={() =>
+                navigation.navigate('HelpCenter', {
+                  goBack: screenName,
+                })
+              }
+            >
+              <View style={styles.eachFeatureContainer}>
+                <View style={styles.eachFeatureMainContainer}>
+                  <View
+                    style={{ display: 'flex', flexDirection: 'row' }}
+                  >
+                    <View style={styles.featureLeftImage}>
+                      <ImageBackground
+                        source={require('../assests/images/helpCenter.jpeg')}
+                        style={styles.imageBackground}
+                      ></ImageBackground>
+                    </View>
+                    <View>
+                      <Text style={styles.featureHeading}>
+                        সাহায্য কেন্দ্র
+                      </Text>
+                      <Text style={styles.featureSubheading}>
+                        Help Center
                       </Text>
                     </View>
                   </View>
@@ -886,6 +951,7 @@ const Homepage = ({ navigation, ...props }) => {
                 goBack={screenName}
                 modalButtonText={modalButtonText}
                 icon={modalIcon}
+                returnToHomepageExists={modalReturnToHomepageExists}
               />
             </View>
           </View>
@@ -1012,7 +1078,6 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
 
     borderRadius: 5,
-    borderWidth: 0,
     elevation: 0.1,
   },
   subsectionContainerText: {

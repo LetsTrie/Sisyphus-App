@@ -8,6 +8,7 @@ import {
 import { AppButton } from './button';
 import Text from './text';
 import { useNavigation } from '@react-navigation/native';
+import colors from '../config/colors';
 
 const ModalWithTitleDescription = (props) => {
   const navigation = useNavigation();
@@ -54,6 +55,17 @@ const ModalWithTitleDescription = (props) => {
               textStyle={{ fontSize: 17.5 }}
             />
           </View>
+
+          {props.returnToHomepageExists && (
+            <View>
+              <AppButton
+                title={'হোমপেইজে প্রবেশ করুন'}
+                onPress={() => props.closeModal()}
+                style={{ backgroundColor: colors.medium }}
+                textStyle={{ fontSize: 17.5 }}
+              />
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -87,7 +99,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingHorizontal: 9,
     color: '#666',
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   imageContainer: {
     textAlign: 'center',

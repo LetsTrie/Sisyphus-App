@@ -18,6 +18,8 @@ import CopyingCards from './App/screens/copyingCards/CopingCards';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import MusicPlayerList from './App/screens/musicPlayers/MusicPlayerList';
+import HelpCenter from './App/screens/HelpCenter';
+import YtScreen from './App/screens/YtScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -85,19 +87,16 @@ export default function App() {
                   ),
                 })}
               />
-
               <Stack.Screen
                 name="LoginSignup"
                 component={LoginSignupComponent}
                 options={{ headerShown: false }}
               />
-
               <Stack.Screen
                 name="DemographicInformation"
                 component={DemographicInformation}
                 options={{ headerShown: false }}
               />
-
               <Stack.Screen
                 name="Homepage"
                 component={Homepage}
@@ -106,7 +105,6 @@ export default function App() {
                   headerShown: false,
                 })}
               />
-
               <Stack.Screen
                 name="AssessmentList"
                 component={AssessmentList}
@@ -123,7 +121,6 @@ export default function App() {
                   ),
                 })}
               />
-
               <Stack.Screen
                 name="ReadingMaterials"
                 component={ReadingMaterials}
@@ -140,7 +137,6 @@ export default function App() {
                   ),
                 })}
               />
-
               <Stack.Screen
                 name="ExploreScale"
                 component={Scale}
@@ -157,12 +153,40 @@ export default function App() {
                   ),
                 })}
               />
-
+              <Stack.Screen
+                name="YtScreen"
+                component={YtScreen}
+                options={({ navigation, route, ...props }) => ({
+                  title: route.params.title ?? 'সংক্ষিপ্ত কিছু কৌশল',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => navigation.navigate('Homepage')}
+                    />
+                  ),
+                })}
+              />
               <Stack.Screen
                 name="TatkhonikUposhom"
                 component={MusicPlayerList}
               />
-
+              <Stack.Screen
+                name="HelpCenter"
+                component={HelpCenter}
+                options={({ navigation }) => ({
+                  title: 'হেল্প সেন্টার',
+                  headerLeft: (props) => (
+                    <HeaderBackButton
+                      {...props}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => {
+                        navigation.navigate('Homepage');
+                      }}
+                    />
+                  ),
+                })}
+              />
               <Stack.Screen
                 name="ScaleResult"
                 component={Result}
@@ -179,7 +203,6 @@ export default function App() {
                   ),
                 })}
               />
-
               <Stack.Screen
                 name="AssessmentResultHistory"
                 component={AssessmentResultHistory}
