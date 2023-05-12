@@ -1,30 +1,41 @@
 {
   "expo": {
-    "name": "sisyphus-client",
-    "slug": "sisyphus-client",
-    "version": "1.0.0",
+    "name": "Sisyphus",
+    "slug": "sisyphusapp",
+    "owner": "letstrie",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.letstrie.sisyphusapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.letstrie.sisyphusapp",
+      "versionCode": 5
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5ac82361-0c33-477d-afea-0b168e84f70e"
+      }
+    },
+    "scheme": "com.letstrie.sisyphusapp"
   }
 }

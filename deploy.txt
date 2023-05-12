@@ -1,0 +1,16 @@
+Run Application
+  nvm use 16 && npm i && npm cache clear
+  npx expo start -c
+
+Build APK:
+  expo prebuild --clean 
+  eas build -p android --profile sisyphusapp
+
+Checking App:
+  expo doctor
+  expo doctor --fix-dependencies
+
+Error: 
+  ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types
+    - https://stackoverflow.com/a/73166444/19758192
+    - yarn patch-package react-native

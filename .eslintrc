@@ -1,0 +1,52 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:node/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "consistent-return": "off",
+    "no-param-reassign": "off",
+    "array-callback-return": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off",
+    "no-continue": "off",
+    "no-shadow": "warn",
+    "no-undef": "warn",
+    "no-await-in-loop": "warn",
+    "no-return-await": "warn",
+    "guard-for-in": "warn",
+    "valid-typeof": "warn",
+    "camelcase": "warn",
+    "no-use-before-define": "warn",
+    "no-useless-escape": "warn",
+    "no-unused-expressions": "off",
+    "max-classes-per-file": "off",
+    "radix": "off",
+    "no-global-assign": "off",
+    "new-cap": "off",
+    "no-prototype-builtins": "off",
+    "no-multi-assign": "warn",
+    "import/order": "warn"
+  }
+}

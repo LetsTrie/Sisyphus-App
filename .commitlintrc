@@ -1,0 +1,5 @@
+"rules": {
+  "header-max-length": [0, "always", 72],
+  "body-case": [2, "always", "lowercase"],
+  "type-enum": [2, "always", ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert']],
+}

@@ -1,0 +1,4 @@
+1. I need a env management system
+2. ios/webClientId
+3. Terms and conditions, privacy and copyright
+4. 
