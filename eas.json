@@ -2,7 +2,7 @@
   "build": {
     "sisyphusapp": {
       "android": {
-         "buildType": "apk"
+         "buildType": "app-bundle"
       }
     },
     "preview2": {
