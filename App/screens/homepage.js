@@ -818,10 +818,8 @@ const Homepage = ({ navigation, ...props }) => {
                     <TouchableOpacity
                       style={styles.subsectionContainer}
                       onPress={() =>
-                        navigation.navigate('ReadingMaterials', {
-                          data: readingMaterials.find(
-                            (issue) => issue.name === 'Study skill',
-                          ),
+                        navigation.navigate('YtScreen', {
+                          videoId: 'rMsLfD3imk4',
                           goBack: screenName,
                         })
                       }
@@ -833,7 +831,27 @@ const Homepage = ({ navigation, ...props }) => {
                         style={{ paddingTop: 4 }}
                       />
                       <Text style={styles.subsectionContainerText}>
-                        স্টাডি স্কিলস
+                        পড়াশোনা সম্পর্কিত দক্ষতা
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.subsectionContainer}
+                      onPress={() =>
+                        navigation.navigate('YtScreen', {
+                          videoId: 'fLOHoBNlFzU',
+                          goBack: screenName,
+                        })
+                      }
+                    >
+                      <AntDesign
+                        name="arrowright"
+                        size={14}
+                        color="black"
+                        style={{ paddingTop: 4 }}
+                      />
+                      <Text style={styles.subsectionContainerText}>
+                        যোগাযোগ সম্পর্কিত দক্ষতা
                       </Text>
                     </TouchableOpacity>
 
@@ -847,6 +865,7 @@ const Homepage = ({ navigation, ...props }) => {
                             banglaName:
                               'ভাল লাগার মুহুর্তগুলোয় মন দেয়া',
                             goBack: screenName,
+                            placeholder: 'ভালো লাগার তালিকা',
                           },
                         )
                       }

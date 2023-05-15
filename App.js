@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useCallback } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -109,7 +110,7 @@ export default function App() {
               <Stack.Screen
                 name="Homepage"
                 component={Homepage}
-                options={({ navigation }) => ({
+                options={() => ({
                   title: 'Quality Life',
                   headerShown: false,
                 })}
@@ -170,7 +171,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtChallengeP1"
                 component={ThoughtChallengeP1}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'চিন্তার পরিবর্তন',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -186,7 +187,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtChallengeP2"
                 component={ThoughtChallengeP2}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'চিন্তার পরিবর্তন',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -202,7 +203,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtChallengeP3"
                 component={ThoughtChallengeP3}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'চিন্তার পরিবর্তন',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -218,7 +219,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtChallengeP4"
                 component={ThoughtChallengeP4}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'চিন্তার পরিবর্তন',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -235,7 +236,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtChallengeInit"
                 component={ThoughtChallengeInit}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'চিন্তার পরিবর্তন',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -249,7 +250,7 @@ export default function App() {
               <Stack.Screen
                 name="ThoughtSummary"
                 component={ThoughtSummary}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                   title: 'সার সংক্ষেপ',
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -265,7 +266,7 @@ export default function App() {
               <Stack.Screen
                 name="ExploreScale"
                 component={Scale}
-                options={({ navigation, route, ...props }) => ({
+                options={({ navigation, route }) => ({
                   title: route.params.banglaTitle,
                   headerLeft: (props) => (
                     <HeaderBackButton
@@ -281,7 +282,7 @@ export default function App() {
               <Stack.Screen
                 name="YtScreen"
                 component={YtScreen}
-                options={({ navigation, route, ...props }) => ({
+                options={({ navigation, route }) => ({
                   title: route.params.title ?? 'সংক্ষিপ্ত কিছু কৌশল',
                   headerLeft: (props) => (
                     <HeaderBackButton

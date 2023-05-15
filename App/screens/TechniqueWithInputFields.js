@@ -37,12 +37,14 @@ const TechniqueWithInputFields = ({
         'ভাল লাগার মুহূর্তগুলো সম্পর্কে বিস্তারিত জানতে এখানে ক্লিক করুন',
       description: `অনিশ্চয়তা ও ভাবনার এই সময়ে, তাই নিজেকে জানতে ও ভাল রাখতে ভাল লাগার মুহূর্তগুলো লিখে ফেলুন:`,
       readingMaterialsName: 'Focusing on good moments',
+      placeholder: 'ভাল লাগার মুহূর্ত',
     },
     learn_how_to_love_yourself: {
       urlText:
         'নিজেকে ভালবাসতে জানার কৌশলগুলো সম্পর্কে জানতে এখানে ক্লিক করুন',
       description: `এখনই শুরু করুন আপনার নিজের নিজেকে ভাল লাগার তালিকা। প্রতিদিন একবার করে চোখ বোলান আর যোগ করুন নতুন কিছু যা আগের বার লেখার সময় মনে ছিল না।`,
       readingMaterialsName: 'Learn to love yourself',
+      placeholder: 'ভাল লাগার তালিকা',
     },
   };
 
@@ -135,7 +137,11 @@ const TechniqueWithInputFields = ({
                   style={{ padding: 25 }}
                 />
               ) : (
-                <InputList items={text} setItems={setText} />
+                <InputList
+                  items={text}
+                  setItems={setText}
+                  placeholder={specificData.placeholder}
+                />
               )}
 
               <AppButton
